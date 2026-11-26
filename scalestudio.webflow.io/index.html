@@ -598,6 +598,25 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
  #wds-service-stage[data-scroll-reveal="complete"] :is(.wds-channel-leader,.wds-channel-trigger){animation:none!important}
 }
 </style>
+<style id="wds-hero-rotation-style">
+.navbar .nav-buttton-wrap[hidden]{display:none!important}
+.section.home-hero .performance-icon{filter:url(#wds-asterisk-navy)!important}
+.section.home-hero .wds-hero-headline{width:100%;max-width:100%;margin-inline:auto}
+.wds-hero-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.wds-hero-fixed,.wds-hero-audience{display:block}
+.wds-hero-word-stack{display:inline-grid;grid-template-columns:1fr;vertical-align:baseline;text-align:left;max-width:100%;align-items:baseline;isolation:isolate}
+.wds-hero-word{grid-area:1/1;visibility:hidden;opacity:0;transform:translateY(.22em);white-space:nowrap;color:#0d0d0d;transition:opacity .28s ease,transform .4s cubic-bezier(.2,.7,.25,1),visibility 0s linear .4s}
+.wds-hero-word.is-active{visibility:visible;opacity:1;transform:translateY(0);transition:opacity .32s ease,transform .4s cubic-bezier(.2,.7,.25,1),visibility 0s}
+.wds-hero-motion-control[hidden]{display:none!important}
+.wds-hero-motion-control{display:inline-grid;place-items:center;flex:none;width:1.6rem;height:1.6rem;border-radius:50%;border:1px solid #122c4e25;background:transparent;color:#122c4e;cursor:pointer;padding:0}
+.wds-hero-motion-control:is(:hover,:focus-visible){background:#d90000;color:#fff}
+.wds-hero-motion-control:focus-visible{outline:2px solid #122c4e;outline-offset:3px}
+.wds-hero-motion-control .wds-hero-play,.wds-hero-motion-control[aria-pressed="true"] .wds-hero-pause{display:none}
+.wds-hero-motion-control[aria-pressed="true"] .wds-hero-play{display:block}
+@media(max-width:991px){.section.home-hero .wds-hero-headline{font-size:clamp(2.5rem,6.6vw,4.25rem)}}
+@media(max-width:600px){.section.home-hero .wds-hero-headline{font-size:clamp(2rem,8vw,2.75rem)}.wds-hero-audience .blue-text{display:block}.wds-hero-word-stack{text-align:center}}
+@media(prefers-reduced-motion:reduce){.wds-hero-word{transition:none!important;transform:none!important}.wds-hero-motion-control{display:none!important}}
+</style>
 </head>
 
 <body>
@@ -711,7 +730,7 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
                                 </div>
                                 </nav>
                         </div>
-                        <div class="nav-buttton-wrap">
+                        <div class="nav-buttton-wrap" hidden aria-hidden="true">
                             <div data-open-product="" data-wf-cart-type="modal" data-wf-cart-query="query Dynamo3 {
   database {
     id
@@ -936,9 +955,9 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
                         <div class="performance-flex">
                             <p class="marketing-lab">Web Design Shop</p>
                             <p class="performance-agency">White label partner</p>
-                        </div>
+                        </div><button type="button" class="wds-hero-motion-control" aria-label="Pause headline animation" aria-pressed="false" hidden><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path class="wds-hero-pause" d="M4 3h3v10H4zm5 0h3v10H9z"/><path class="wds-hero-play" d="M5 3l8 5-8 5z"/></svg></button>
                     </div>
-                    <h1 class="dominate-text">Digital growth. <span class="blue-text">Built for</span> Agencies.</h1>
+                    <h1 class="dominate-text wds-hero-headline"><span class="wds-hero-sr">Digital growth. Built for agencies, businesses, startups and Gen Z brands.</span><span aria-hidden="true" class="wds-hero-fixed">Digital growth.</span><span aria-hidden="true" class="wds-hero-audience"><span class="blue-text">Built for</span> <span class="wds-hero-word-stack"><span class="wds-hero-word is-active">Agencies.</span><span class="wds-hero-word">Businesses.</span><span class="wds-hero-word">Startups.</span><span class="wds-hero-word">Gen Z brands.</span></span></span></h1>
                     <p class="marketing-para">Website design and search marketing for agencies and growing businesses.</p>
                     <div class="hero-buttons v1">
                         <a href="https://webdesignshop.com/contact/" data-wf--primary-button--variant="orange-light" class="primary-button w-variant-78214eb8-baca-ebb7-1f29-f0a504de6f4a w-inline-block">
@@ -2854,6 +2873,34 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
  window.addEventListener("scroll",queue,{passive:true});
  window.addEventListener("resize",queue,{passive:true});
  measure();
+})();
+</script>
+<script id="wds-hero-rotation-script">
+(function(){
+ const hero=document.querySelector(".section.home-hero");
+ if(!hero)return;
+ const heading=hero.querySelector(".wds-hero-headline"),words=Array.from(hero.querySelectorAll(".wds-hero-word")),control=hero.querySelector(".wds-hero-motion-control");
+ if(!heading||words.length!==4||!control)return;
+ const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+ let index=0,timer=0,paused=false,visible=!window.IntersectionObserver;
+ function schedule(){
+  clearTimeout(timer);
+  if(paused||reduced.matches||!visible||document.hidden||heading.matches(":hover"))return;
+  timer=setTimeout(function(){
+   words[index].classList.remove("is-active");
+   index=(index+1)%words.length;
+   words[index].classList.add("is-active");
+   schedule();
+  },2800);
+ }
+ control.hidden=false;
+ control.addEventListener("click",function(){paused=!paused;control.setAttribute("aria-pressed",String(paused));control.setAttribute("aria-label",paused?"Resume headline animation":"Pause headline animation");schedule();});
+ heading.addEventListener("pointerenter",schedule);
+ heading.addEventListener("pointerleave",()=>setTimeout(schedule,0));
+ document.addEventListener("visibilitychange",schedule);
+ if(reduced.addEventListener)reduced.addEventListener("change",schedule);
+ if(window.IntersectionObserver){const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule();},{threshold:.1});observer.observe(heading);}
+ schedule();
 })();
 </script>
 </body>
