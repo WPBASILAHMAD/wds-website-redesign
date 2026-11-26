@@ -205,6 +205,14 @@
 @container (max-width:620px){#wds-performance-chart .wds-performance-grid{grid-template-columns:repeat(40,minmax(0,1fr))}#wds-performance-chart .wds-dot-column:nth-child(n+41){display:none}#wds-performance-chart .wds-performance-stat{gap:.4rem}#wds-performance-chart .wds-performance-example{font-size:.8rem;padding:.5rem}}
 @container (max-width:400px){#wds-performance-chart .wds-performance-grid{grid-template-columns:repeat(28,minmax(0,1fr))}#wds-performance-chart .wds-dot-column:nth-child(n+29){display:none}#wds-performance-chart .wds-performance-top{align-items:flex-start;gap:.65rem}#wds-performance-chart .wds-performance-stat{flex-direction:column;align-items:flex-end;gap:.35rem}#wds-performance-chart .wds-performance-subtitle{font-size:.8rem}#wds-performance-chart .wds-performance-title{font-size:1rem}}
 @media(prefers-reduced-motion:reduce){#wds-performance-chart.is-animating .wds-performance-dot.is-filled{animation:none!important}}
+/* Preserve the icon's two colors instead of flattening its alpha channel. */
+.behind-title svg.behind-plus.wds-brand-plus{filter:none!important;flex:none}
+#wds-performance-chart .wds-performance-dot{transition:background-color .32s ease,transform .32s ease}
+#wds-performance-chart .wds-dot-column.is-cursor-filled .wds-performance-dot{background:#122c4e;transform:scale(1.16);transition-duration:.12s;transition-delay:calc((9 - var(--row))*12ms)}
+#wds-performance-chart .wds-dot-column.is-cursor-edge .wds-performance-dot{background:#36577e;transform:scale(1.06);transition-duration:.18s;transition-delay:calc((9 - var(--row))*9ms)}
+@media(prefers-reduced-motion:reduce){
+ #wds-performance-chart .wds-performance-dot{transition:none!important;transform:none!important}
+}
 </style>
 <style id="wds-tech-marquee-style">
 #wds-tech-marquee{max-width:36rem;overflow:hidden;--tech-card:6.375rem;--tech-gap:1rem;--tech-duration:48s}
@@ -1033,8 +1041,7 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
                         </div>
                     </div>
                     <div class="behind-texts">
-                        <h2 class="behind-title">We help businesses strengthen their online presence, attract the right customers and generate <span class="measurable">qualified</span> <span class="gray-text">leads. We bring website design, SEO and digital marketing together into <span class="behind-plus-inline"><img
-                            src="https://cdn.prod.website-files.com/6a6bdef8f4ecd6b998614875/6a6bdef8f4ecd6b9986148b3_Plus.webp" loading="lazy" alt="" aria-hidden="true" class="behind-plus" /> one</span> cohesive strategy focused on long-term growth.</span></h2></div>
+                        <h2 class="behind-title">We help businesses strengthen their online presence, attract the right customers and generate <span class="measurable">qualified</span> <span class="gray-text">leads. We bring website design, SEO and digital marketing together into <span class="behind-plus-inline"><svg class="behind-plus wds-brand-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40" aria-hidden="true" focusable="false"><circle cx="20" cy="20" r="20" fill="#122c4e"/><path d="M20 11V29M11 20H29" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/></svg> one</span> cohesive strategy focused on long-term growth.</span></h2></div>
                 </div>
                 <div class="behind-bottom">
                     <div class="behind-grid">
@@ -2616,7 +2623,7 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
     timer=setTimeout(function(){
       range.value=String(Number(range.value)%items.length+1);
       update();schedule();
-    },5000);
+    },3000);
   }
   function manual(){update();schedule();}
   range.addEventListener("input",manual);
@@ -2660,6 +2667,46 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
     }
     frame=requestAnimationFrame(tick);
     timer=setTimeout(finish,2600);
+  }
+  // Cursor brush: fill columns in a short wave without changing the illustrative statistic.
+  const grid=chart.querySelector(".wds-performance-grid");
+  if(grid){
+    const columns=Array.from(grid.querySelectorAll(".wds-dot-column"));
+    let brushFrame=0, cursorX=0, active=new Set();
+    function clearBrush(){
+      cancelAnimationFrame(brushFrame);brushFrame=0;
+      active.forEach(col=>col.classList.remove("is-cursor-filled","is-cursor-edge"));
+      active.clear();
+    }
+    function drawBrush(){
+      brushFrame=0;
+      const rect=grid.getBoundingClientRect();
+      const visible=columns.filter(col=>col.offsetWidth>0);
+      if(!visible.length||!rect.width){clearBrush();return;}
+      const index=Math.max(0,Math.min(visible.length-1,Math.floor((cursorX-rect.left)/rect.width*visible.length)));
+      const next=new Set();
+      for(let i=Math.max(0,index-4);i<=Math.min(visible.length-1,index+4);i++){
+        const col=visible[i],edge=Math.abs(i-index)>2;
+        next.add(col);
+        col.classList.toggle("is-cursor-filled",!edge);
+        col.classList.toggle("is-cursor-edge",edge);
+      }
+      active.forEach(col=>{if(!next.has(col))col.classList.remove("is-cursor-filled","is-cursor-edge");});
+      active=next;
+    }
+    function move(e){
+      if(e.pointerType!=="mouse"&&e.pointerType!=="pen")return;
+      if(reduced.matches)return;
+      if(chart.classList.contains("is-animating")||!hasPlayed){hasPlayed=true;finish();}
+      cursorX=e.clientX;
+      if(!brushFrame)brushFrame=requestAnimationFrame(drawBrush);
+    }
+    grid.addEventListener("pointerenter",move);
+    grid.addEventListener("pointermove",move,{passive:true});
+    grid.addEventListener("pointerleave",clearBrush);
+    grid.addEventListener("pointercancel",clearBrush);
+    window.addEventListener("resize",clearBrush,{passive:true});
+    if(reduced.addEventListener)reduced.addEventListener("change",clearBrush);
   }
   if("IntersectionObserver" in window){
     const observer=new IntersectionObserver(function(entries){
