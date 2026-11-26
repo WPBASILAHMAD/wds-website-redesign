@@ -168,6 +168,25 @@
             }
         }
     </style>
+<style id="wds-seo-explorer-style">
+#wds-seo-explorer .wds-seo-card{height:auto;min-height:16rem;flex:1;justify-content:center;gap:.65rem;padding:1.25rem 1.5rem;box-sizing:border-box;width:100%}
+#wds-seo-explorer .wds-seo-label{margin:0;font-weight:500}
+#wds-seo-explorer .wds-seo-index{display:flex;align-items:baseline;justify-content:center;gap:.5rem;font-family:"Inter Tight",sans-serif;line-height:1;letter-spacing:-.045em;font-size:clamp(3.5rem,5vw,5rem);font-weight:600;color:#0d0d0d;font-variant-numeric:tabular-nums}
+#wds-seo-explorer .wds-seo-total{font-size:.34em;font-weight:500;color:#727272;letter-spacing:-.03em}
+#wds-seo-explorer .wds-seo-instruction{margin:0;text-align:center;color:#5b5b5b;font-size:.875rem;line-height:1.35}
+#wds-seo-explorer .wds-seo-controls{width:100%;margin-top:.4rem}
+#wds-seo-explorer .wds-seo-range{--seo-fill:100%;appearance:none;-webkit-appearance:none;display:block;width:100%;height:2.5rem;box-sizing:border-box;margin:0;border:5px solid #dce5ff;border-radius:999px;background:linear-gradient(90deg,#adc6ff 0%,#004fff var(--seo-fill),#dce5ff var(--seo-fill),#dce5ff 100%);cursor:pointer;touch-action:pan-y}
+#wds-seo-explorer .wds-seo-range::-webkit-slider-runnable-track{background:transparent;border-radius:999px}
+#wds-seo-explorer .wds-seo-range::-moz-range-track{background:transparent;border:0;border-radius:999px}
+#wds-seo-explorer .wds-seo-range::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:1.8rem;height:1.8rem;border:3px solid #2b00ff;background:#fff;border-radius:50%;box-shadow:0 3px 9px #2b00ff55;cursor:grab}
+#wds-seo-explorer .wds-seo-range::-moz-range-thumb{width:1.5rem;height:1.5rem;border:3px solid #2b00ff;background:#fff;border-radius:50%;box-shadow:0 3px 9px #2b00ff55;cursor:grab}
+#wds-seo-explorer .wds-seo-range:active{cursor:grabbing}
+#wds-seo-explorer .wds-seo-range:focus-visible{outline:2px solid #2b00ff;outline-offset:4px}
+#wds-seo-explorer .wds-seo-ticks{display:flex;justify-content:space-between;padding:.4rem .5rem 0;font-size:.7rem;line-height:1;color:#6b7280;font-variant-numeric:tabular-nums}
+#wds-seo-explorer .wds-seo-ticks .is-active{color:#2b00ff;font-weight:700}
+#wds-seo-explorer .behind-flex._02{min-height:5.25rem;justify-content:flex-start}
+@media(max-width:767px){#wds-seo-explorer .wds-seo-card{min-height:14rem;padding:1.25rem 1rem}#wds-seo-explorer .behind-flex._02{min-height:0}}
+</style>
 </head>
 
 <body>
@@ -631,26 +650,21 @@
                                 <p class="growth-para">Our work is measured by its impact on your business.</p>
                             </div>
                         </div>
-                        <div section="" class="behind-card _02">
-                            <div class="revenue-card">
-                                <p class="generated-para">SEO Specialties</p>
-                                <div class="cta-animation generated">
-                                    <h2 class="cta-counter revenue"></h2>
-                                    <h2 data-decimals="0" data-counter="" data-count="8" data-suffix="" class="cta-counter revenue">8</h2>
+                        <div section="" class="behind-card _02" id="wds-seo-explorer">
+                            <div class="revenue-card wds-seo-card">
+                                <label class="generated-para wds-seo-label" for="wds-seo-range">SEO Expertise</label>
+                                <div class="wds-seo-index" aria-hidden="true">
+                                    <span id="wds-seo-number">08</span><span class="wds-seo-total">/ 08</span>
                                 </div>
-                                <div class="range-slider-box">
-                                    <div class="range-box">
-                                        <div class="range-animation">
-                                            <div class="range-ball"></div>
-                                            <div class="range-line"></div>
-                                            <div class="range-year">Areas of expertise</div>
-                                        </div>
-                                    </div>
+                                <p class="wds-seo-instruction" id="wds-seo-hint">Explore our areas of expertise</p>
+                                <div class="wds-seo-controls">
+                                    <input type="range" id="wds-seo-range" class="wds-seo-range" min="1" max="8" step="1" value="8" aria-describedby="wds-seo-hint" aria-valuetext="8 of 8: E-commerce SEO">
+                                    <div class="wds-seo-ticks" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span class="is-active">08</span></div>
                                 </div>
                             </div>
-                            <div class="behind-flex _02">
-                                <h3 class="growth-system">We Are Specialized</h3>
-                                <p class="growth-para">Focused expertise in web design, branding and SEO.</p>
+                            <div class="behind-flex _02" aria-live="polite" aria-atomic="true">
+                                <h3 class="growth-system" id="wds-seo-title">E-commerce SEO</h3>
+                                <p class="growth-para" id="wds-seo-description">Improve product and category visibility to help shoppers find your store.</p>
                             </div>
                         </div>
                     </div>
@@ -2218,6 +2232,31 @@
 
         });
     </script>
+<script id="wds-seo-explorer-script">
+(function(){
+  const root=document.getElementById("wds-seo-explorer");
+  if(!root)return;
+  const items=[["Keyword Research","Identify relevant search terms and opportunities for your business."],["On-Page SEO","Optimize page content, headings and metadata for relevant searches."],["Technical SEO","Improve crawlability, indexing and website performance."],["Off-Page SEO","Build online authority through relevant links and outreach."],["Local SEO","Help nearby customers discover your business in local searches."],["Content Writing","Create helpful, search-friendly content for your audience."],["SEO Audits","Identify technical and content improvements that support search visibility."],["E-commerce SEO","Improve product and category visibility to help shoppers find your store."]];
+  const range=root.querySelector("#wds-seo-range");
+  const number=root.querySelector("#wds-seo-number");
+  const title=root.querySelector("#wds-seo-title");
+  const description=root.querySelector("#wds-seo-description");
+  const ticks=root.querySelectorAll(".wds-seo-ticks span");
+  function update(){
+    const index=Math.max(0,Math.min(items.length-1,Number(range.value)-1));
+    const item=items[index];
+    number.textContent=String(index+1).padStart(2,"0");
+    title.textContent=item[0];
+    description.textContent=item[1];
+    range.style.setProperty("--seo-fill", (index/(items.length-1)*100)+"%");
+    range.setAttribute("aria-valuetext",(index+1)+" of "+items.length+": "+item[0]);
+    ticks.forEach((tick,i)=>tick.classList.toggle("is-active",i===index));
+  }
+  range.addEventListener("input",update);
+  range.addEventListener("change",update);
+  update();
+})();
+</script>
 </body>
 
 </html>
