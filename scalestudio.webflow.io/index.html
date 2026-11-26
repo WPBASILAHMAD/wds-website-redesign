@@ -534,6 +534,12 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
 }
 @media(prefers-reduced-motion:reduce){#wds-service-stage .wds-service-detail{animation:none}#wds-service-stage :is(.wds-channel-trigger,.wds-channel-hub,.wds-service-learn){transition:none}}
 </style>
+<style id="wds-project-pricing-seo-refinements">
+.section.success-rating .rating-arrow{filter:url(#wds-project-orange-to-red)}
+#wds-seo-explorer .wds-seo-auto-controls{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:.15rem .45rem}
+#wds-seo-explorer .wds-seo-auto-toggle{border:0;background:transparent;color:#122c4e;font:inherit;font-size:.75rem;line-height:1.35;padding:.2rem .4rem;border-radius:.3rem;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+#wds-seo-explorer .wds-seo-auto-toggle:is(:hover,:focus-visible){background:#d90000!important;color:#fff!important}
+</style>
 </head>
 
 <body>
@@ -998,17 +1004,17 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
                             <div class="revenue-card wds-seo-card">
                                 <label class="generated-para wds-seo-label" for="wds-seo-range">SEO Expertise</label>
                                 <div class="wds-seo-index" aria-hidden="true">
-                                    <span id="wds-seo-number">08</span><span class="wds-seo-total">/ 08</span>
+                                    <span id="wds-seo-number">01</span><span class="wds-seo-total">/ 08</span>
                                 </div>
-                                <p class="wds-seo-instruction" id="wds-seo-hint">Explore our areas of expertise</p>
+                                <div class="wds-seo-auto-controls"><p class="wds-seo-instruction" id="wds-seo-hint">Explore our areas of expertise</p><button type="button" class="wds-seo-auto-toggle" aria-label="Pause automatic SEO specialty cycling" aria-pressed="false">Pause</button></div>
                                 <div class="wds-seo-controls">
-                                    <input type="range" id="wds-seo-range" class="wds-seo-range" min="1" max="8" step="1" value="8" aria-describedby="wds-seo-hint" aria-valuetext="8 of 8: E-commerce SEO">
-                                    <div class="wds-seo-ticks" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span class="is-active">08</span></div>
+                                    <input type="range" id="wds-seo-range" class="wds-seo-range" min="1" max="8" step="1" value="1" aria-describedby="wds-seo-hint" aria-valuetext="1 of 8: Keyword Research" style="--seo-fill:0%">
+                                    <div class="wds-seo-ticks" aria-hidden="true"><span class="is-active">01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span></div>
                                 </div>
                             </div>
                             <div class="behind-flex _02" aria-live="polite" aria-atomic="true">
-                                <h3 class="growth-system" id="wds-seo-title">E-commerce SEO</h3>
-                                <p class="growth-para" id="wds-seo-description">Improve product and category visibility to help shoppers find your store.</p>
+                                <h3 class="growth-system" id="wds-seo-title">Keyword Research</h3>
+                                <p class="growth-para" id="wds-seo-description">Identify relevant search terms and opportunities for your business.</p>
                             </div>
                         </div>
                     </div>
@@ -2552,9 +2558,37 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
     range.setAttribute("aria-valuetext",(index+1)+" of "+items.length+": "+item[0]);
     ticks.forEach((tick,i)=>tick.classList.toggle("is-active",i===index));
   }
-  range.addEventListener("input",update);
-  range.addEventListener("change",update);
-  update();
+  const toggle=root.querySelector(".wds-seo-auto-toggle");
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+  let timer=0, paused=reduced.matches, visible=!window.IntersectionObserver, dragging=false;
+  function syncButton(){
+    toggle.textContent=paused?"Play":"Pause";
+    toggle.setAttribute("aria-pressed",String(paused));
+    toggle.setAttribute("aria-label",(paused?"Resume":"Pause")+" automatic SEO specialty cycling");
+  }
+  function schedule(){
+    clearTimeout(timer);
+    if(paused||!visible||document.hidden||dragging||range.matches(":hover")||document.activeElement===range)return;
+    timer=setTimeout(function(){
+      range.value=String(Number(range.value)%items.length+1);
+      update();schedule();
+    },20000);
+  }
+  function manual(){update();schedule();}
+  range.addEventListener("input",manual);
+  range.addEventListener("change",manual);
+  ["pointerenter","focus"].forEach(e=>range.addEventListener(e,schedule));
+  ["pointerleave","blur"].forEach(e=>range.addEventListener(e,()=>setTimeout(schedule,0)));
+  range.addEventListener("pointerdown",()=>{dragging=true;schedule();});
+  ["pointerup","pointercancel"].forEach(e=>window.addEventListener(e,()=>{if(dragging){dragging=false;schedule();}}));
+  toggle.addEventListener("click",()=>{paused=!paused;syncButton();schedule();});
+  document.addEventListener("visibilitychange",schedule);
+  if(reduced.addEventListener)reduced.addEventListener("change",e=>{paused=e.matches;syncButton();schedule();});
+  if(window.IntersectionObserver){
+    const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule();},{threshold:.15});
+    observer.observe(root);
+  }
+  update();syncButton();schedule();
 })();
 </script>
 <script id="wds-performance-chart-script">
@@ -2593,7 +2627,7 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
   if(reduced.addEventListener)reduced.addEventListener("change",function(e){if(e.matches)finish();});
 })();
 </script>
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="wds-orange-icon-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .14902 0 .85098  0 0 1 0 0  0 0 1 0 0  0 0 0 1 0"/></filter><filter id="wds-blue-icon-to-navy" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0.92941176 0 0 0.07058824  0 0.82745098 0 0 0.17254902  0 0.69411765 0 0 0.30588235  0 0 0 1 0"/></filter></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="wds-project-orange-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .195876 0 .804124  0 0 1.314433 0 -.314433  0 0 1.314433 0 -.314433  0 0 0 1 0"/></filter><filter id="wds-orange-icon-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .14902 0 .85098  0 0 1 0 0  0 0 1 0 0  0 0 0 1 0"/></filter><filter id="wds-blue-icon-to-navy" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0.92941176 0 0 0.07058824  0 0.82745098 0 0 0.17254902  0 0.69411765 0 0 0.30588235  0 0 0 1 0"/></filter></defs></svg>
 <script id="wds-growth-service-marquee-script">
 (function(){
 const root=document.getElementById("wds-growth-service-marquee");
@@ -2653,6 +2687,17 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
   target.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
   if(tab)tab.focus({preventScroll:true});
  }));
+})();
+</script>
+<script id="wds-pricing-hover-script">
+(function(){
+ const menu=document.querySelector("#wds-service-pricing .pricing-tabs-menu");
+ if(!menu)return;
+ menu.querySelectorAll(".pricing-tab[data-w-tab]").forEach(function(tab){
+  tab.addEventListener("pointerenter",function(e){
+   if(e.pointerType==="mouse"&&!tab.classList.contains("w--current"))tab.click();
+  });
+ });
 })();
 </script>
 </body>
