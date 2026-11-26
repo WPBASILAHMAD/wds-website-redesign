@@ -247,35 +247,15 @@ body .secondary-button:is(:hover,:focus-visible){border-radius:.375rem}
 body :is(.primary-button,.secondary-button,.check-button,.case-link,.password-button,.pricing-tab,.social-link,.team-social,.cart-button,.close-button,.remove-button,.revenue-lightbox,.menu-button,.w-button,button,input[type="submit"]):focus-visible{outline:2px solid var(--wds-button-red);outline-offset:3px}
 </style>
 <style id="wds-final-cta-style">
-.section.cta{--cta-purple:#7029d9;--cta-red:#d90000;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);align-items:center;gap:clamp(2rem,5vw,5rem);padding:clamp(3.5rem,6vw,6.5rem) max(1.5rem,calc((100% - 83rem)/2));background-image:radial-gradient(ellipse at 100% 100%,#d9000040 0%,transparent 54%),radial-gradient(ellipse at 75% 0%,#7029d92c 0%,transparent 55%),linear-gradient(115deg,#ffffff 0%,#f6f4f8 58%,#f3e6f1 100%)!important;background-color:#f7f5f8;overflow:hidden}
-.section.cta>.container{width:100%;height:auto;max-width:none;padding:0;margin:0}
-.section.cta .wrapper.cta{padding:0;width:100%;max-width:none;align-items:flex-start}
-.section.cta .cta-left{max-width:35rem;width:100%}
+.section.cta{isolation:isolate;background-image:none!important;background-color:#fff}
+.section.cta::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:url("https://cdn.prod.website-files.com/6a6bdef8f4ecd6b998614875/6a6bdef8f4ecd6b9986148a2_CTA.webp") center/cover no-repeat;filter:hue-rotate(-28deg)}
 .section.cta .cta-title{color:#0d0d0d}
-.section.cta .cta-title .blue-text{color:var(--cta-purple)!important}
-.section.cta .cta-para{color:#49454e}
-.section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="orange-light"]{background-color:var(--cta-red)!important;color:#fff!important}
+.section.cta .blue-text{color:#7029d9!important}
+.section.cta .cta-card{background-color:#fff}
+.section.cta .cta-counter,.section.cta .cta-desp{color:#0d0d0d}
+.section.cta .cta-line{background-color:#7029d9}
+.section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="orange-light"]{background-color:#d90000!important;color:#fff!important}
 .section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="orange-light"] :is(.button-text,.button-arrow,.button-arrows,.button-texts){color:#fff!important}
-.section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="white"]{box-shadow:inset 0 0 0 1px #e5dfe9}
-.section.cta .wds-cta-metrics{position:relative;inset:auto;align-self:center;align-items:stretch;justify-content:center;max-width:none;width:100%;min-width:0;box-sizing:border-box;gap:1.5rem;padding:clamp(1.5rem,3vw,2.5rem);background:#fff;border:1px solid #fff;border-radius:1.5rem;box-shadow:0 20px 55px #21112f14;overflow:hidden;color:#0d0d0d}
-.section.cta .wds-cta-eyebrow{display:flex;align-items:center;gap:.5rem;margin:0;color:#514a59;font-size:.875rem;font-weight:500}
-.section.cta .wds-cta-dot{width:.6rem;height:.6rem;border-radius:50%;background:var(--cta-red)}
-.section.cta .wds-cta-main{display:flex;align-items:center;gap:1.25rem;min-width:0}
-.section.cta .wds-cta-main .cta-animation{flex:none;align-items:baseline;gap:0}
-.section.cta .wds-cta-main .cta-counter{font-size:clamp(4rem,7vw,6rem);line-height:1;letter-spacing:-.055em;color:#0d0d0d;margin:0;padding:0}
-.section.cta .wds-cta-metric-plus{font-size:clamp(3rem,5vw,4.5rem);line-height:1;color:var(--cta-red);font-weight:700}
-.section.cta .wds-cta-metric-copy{min-width:0}
-.section.cta .wds-cta-metric-copy h3{font-size:clamp(1.15rem,1.8vw,1.5rem);line-height:1.15;letter-spacing:-.025em;margin:0 0 .5rem;font-weight:600}
-.section.cta .wds-cta-metric-copy .cta-desp{max-width:none;font-size:.95rem;font-weight:400;line-height:1.4;color:#54505a;margin:0;text-align:left}
-.section.cta .wds-cta-secondary{display:grid;grid-template-columns:1fr 1fr;gap:1rem;border-top:1px solid #e9e3ed;padding-top:1.25rem}
-.section.cta .wds-cta-secondary>div{display:flex;flex-direction:column;gap:.4rem;min-width:0}
-.section.cta .wds-cta-secondary>div+div{border-left:1px solid #e9e3ed;padding-left:1rem}
-.section.cta .wds-cta-secondary strong{font-size:2.25rem;line-height:1;font-weight:600;color:var(--cta-purple);letter-spacing:-.04em}
-.section.cta .wds-cta-secondary span{color:#514a59;font-size:.875rem;line-height:1.3}
-.section.cta .wds-cta-metrics .cta-line{background:linear-gradient(180deg,var(--cta-red),var(--cta-purple));width:.4rem;height:100%;inset:0 0 0 auto;margin:0;pointer-events:none}
-@media(max-width:991px){.section.cta{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem;padding:3.5rem 1.5rem}.section.cta .wds-cta-main{gap:.75rem}}
-@media(max-width:767px){.section.cta{grid-template-columns:minmax(0,1fr);gap:2rem;padding:3rem 1rem}.section.cta .wrapper.cta{align-items:center}.section.cta .cta-left{align-items:center;max-width:32rem}.section.cta .cta-title,.section.cta .cta-para{text-align:center}.section.cta .wds-cta-metrics{max-width:32rem;justify-self:center}}
-@media(max-width:479px){.section.cta .wds-cta-metrics{padding:1.25rem;gap:1.25rem}.section.cta .wds-cta-main .cta-counter{font-size:4rem}.section.cta .wds-cta-metric-copy h3{font-size:1.1rem}.section.cta .wds-cta-metric-copy .cta-desp{font-size:.875rem}.section.cta .wds-cta-secondary strong{font-size:1.9rem}}
 </style>
 </head>
 
@@ -2228,23 +2208,12 @@ body :is(.primary-button,.secondary-button,.check-button,.case-link,.password-bu
                 </div>
             </div>
         </div>
-        <div box="" class="cta-card wds-cta-metrics">
-            <p class="wds-cta-eyebrow"><span class="wds-cta-dot" aria-hidden="true"></span> One digital partner</p>
-            <div class="wds-cta-main">
-                <div class="cta-animation">
-                    <h2 data-count="6" data-counter="" data-decimals="0" data-suffix="" class="cta-counter">6</h2>
-                    <span class="wds-cta-metric-plus" aria-hidden="true">.</span>
-                </div>
-                <div class="wds-cta-metric-copy">
-                    <h3>Core digital services</h3>
-                    <p class="cta-desp">Design, search and marketing, working together for your business.</p>
-                </div>
+        <div box="" class="cta-card">
+            <div class="cta-animation">
+                <h2 data-count="8" data-counter="" data-decimals="0" data-suffix="" class="cta-counter">8</h2>
             </div>
-            <div class="wds-cta-secondary">
-                <div><strong>8</strong><span>SEO specialties</span></div>
-                <div><strong>16</strong><span>Tools &amp; technologies</span></div>
-            </div>
-            <div class="cta-line" aria-hidden="true"></div>
+            <p class="cta-desp">SEO specialties to support your online presence.</p>
+            <div class="cta-line"></div>
         </div>
     </section>
     <section class="footer">
