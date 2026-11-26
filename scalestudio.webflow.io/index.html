@@ -543,6 +543,11 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
 <style id="wds-project-pricing-seo-refinements">
 .section.success-rating .rating-arrow{filter:url(#wds-project-orange-to-red)}
 </style>
+<style id="wds-asterisk-brand-colors">
+/* Recolor the two decorative asterisk assets, retaining their original alpha and dimensions. */
+img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asterisk-red)}
+.behind-title img.behind-plus[src$="6a6bdef8f4ecd6b9986148b3_Plus.webp"]{filter:url(#wds-asterisk-navy)}
+</style>
 </head>
 
 <body>
@@ -2623,7 +2628,7 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
   if(reduced.addEventListener)reduced.addEventListener("change",function(e){if(e.matches)finish();});
 })();
 </script>
-<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="wds-project-orange-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .195876 0 .804124  0 0 1.314433 0 -.314433  0 0 1.314433 0 -.314433  0 0 0 1 0"/></filter><filter id="wds-orange-icon-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .14902 0 .85098  0 0 1 0 0  0 0 1 0 0  0 0 0 1 0"/></filter><filter id="wds-blue-icon-to-navy" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0.92941176 0 0 0.07058824  0 0.82745098 0 0 0.17254902  0 0.69411765 0 0 0.30588235  0 0 0 1 0"/></filter></defs></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="wds-asterisk-red" color-interpolation-filters="sRGB"><feFlood flood-color="#D90000" result="brand"/><feComposite in="brand" in2="SourceAlpha" operator="in"/></filter><filter id="wds-asterisk-navy" color-interpolation-filters="sRGB"><feFlood flood-color="#122C4E" result="brand"/><feComposite in="brand" in2="SourceAlpha" operator="in"/></filter><filter id="wds-project-orange-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .195876 0 .804124  0 0 1.314433 0 -.314433  0 0 1.314433 0 -.314433  0 0 0 1 0"/></filter><filter id="wds-orange-icon-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .14902 0 .85098  0 0 1 0 0  0 0 1 0 0  0 0 0 1 0"/></filter><filter id="wds-blue-icon-to-navy" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0.92941176 0 0 0.07058824  0 0.82745098 0 0 0.17254902  0 0.69411765 0 0 0.30588235  0 0 0 1 0"/></filter></defs></svg>
 <script id="wds-growth-service-marquee-script">
 (function(){
 const root=document.getElementById("wds-growth-service-marquee");
