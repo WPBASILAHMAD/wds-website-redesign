@@ -617,12 +617,29 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
 @media(max-width:600px){.section.home-hero .wds-hero-headline{font-size:clamp(2rem,8vw,2.75rem)}.wds-hero-audience .blue-text{display:block}.wds-hero-word-stack{text-align:center}}
 @media(prefers-reduced-motion:reduce){.wds-hero-word{transition:none!important;transform:none!important}.wds-hero-motion-control{display:none!important}}
 </style>
+<style id="wds-hero-brick-style">
+/* Fixed floating header, with its original position reserved in the document. */
+.wds-sticky-header-space{height:var(--wds-header-space,5rem);min-height:0}
+.wds-sticky-header-space>.navbar.w-nav{position:fixed!important;top:var(--_sizes---spacing--spacing-medium,1.25rem);left:1rem;right:1rem;width:calc(100% - 2rem);max-width:75rem;margin:0 auto;z-index:1100}
+html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
+.wds-sticky-header-space>.navbar.w-nav.w--open{z-index:1101}
+/* Soft white masonry, isolated behind the original hero content. */
+.section.home-hero{position:relative;isolation:isolate;overflow:hidden;background:#fff}
+.section.home-hero>.container{position:relative;z-index:1}
+.wds-hero-brick-field{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#f4f5f7;perspective:750px;mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 87%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 87%,transparent 100%)}
+.wds-hero-brick-field:empty{background:none}
+.wds-hero-brick-field::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,#ffffffa6 0%,#ffffff55 35%,#ffffff00 75%);pointer-events:none;z-index:2}
+.wds-hero-brick{position:absolute;box-sizing:border-box;width:var(--brick-w);height:var(--brick-h);border:1px solid #e5e8ec;border-radius:5px;background:linear-gradient(150deg,#fff 12%,#fcfcfd 65%,#f6f7f9);box-shadow:0 2px 0 #e3e6eb,0 3px 6px #122c4e08,inset 0 1px 1px #fff;transform:translate3d(0,0,0);transform-origin:center;transition:transform .55s cubic-bezier(.2,.7,.25,1),box-shadow .45s ease;}
+.wds-hero-brick.is-raised{z-index:1;transform:translate3d(0,var(--brick-lift),var(--brick-depth)) rotateX(var(--brick-rx)) rotateY(var(--brick-ry));box-shadow:0 4px 0 #dfe4ea,0 10px 18px #122c4e1c,inset 0 1px 1px #fff;transition-duration:.15s,.18s}
+@media(max-width:767px){.wds-hero-brick-field{opacity:.65}.wds-hero-brick-field::after{background:radial-gradient(ellipse at center,#ffffffc9,#ffffff44 70%,transparent)}}
+@media(prefers-reduced-motion:reduce){.wds-hero-brick,.wds-hero-brick.is-raised{transform:none!important;transition:none!important;box-shadow:0 2px 0 #e3e6eb,0 3px 6px #122c4e08}}
+</style>
 </head>
 
 <body>
     <div class="page-wrapper">
         <div class="main-wrapper">
-            <div class="container">
+            <div class="container wds-sticky-header-space">
                 <div data-w-id="71c301e0-1475-0135-831e-634711b2fda0" data-animation="default" data-collapse="medium" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navbar w-nav">
                     <div class="nav-wrapper">
                         <div class="navbar-left-wrap"><a href="/" aria-current="page" class="brand-logo w-nav-brand w--current"><img loading="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQAAAAA1BAMAAABcnCj/AAAAGFBMVEUAAAD+AAARLE/5AAAPJk76AQH8AQAQK0zENue+AAAACHRSTlMA+PEaHF2fpE0hx2AAAAbaSURBVHjaxZnfbxTXFcc/O/eOVxTX2SvXKMnS7XSwSyXDMs7GliKXdEqNEqWJMzXe9KFVGoT6WiHEn1FVUaW+pOIlypsVOqJFqOoKjUKImrirrviREOGMht80CIfGBULnh/sws7veeBtIqCb3YebsmXvvOff8+J577wraTdSnLmzY8LLxAbm2QpuY3OamxPxi6+tQYOp8h6U/nqcGYp18kjtj1/NWQP/3Wl5y+05+CmgA4he9zGhfzjGw1gFp+04rTxeI2+vYK3fzdEF1PTuxclRA9BN2KccYGNjYh58bGGjwk3780MjNAmKo86NO6HY0u5mXAh0PyEoT8cRS2wcf5+WC8bb8chPixdG2D3LKA4kVpFS5VdtSuvnRYhuVrHyisNAOgblDk0uALJ9+2b1PEMxE3hdB2773Wl9ioNQyoim2LQHRpfhsT52UdmfUDA0AqkmbIyyg2TtjdeGHrX6yZYPjZp8YmMjerWq68MRp9gZB9XJbV78doN1U8X3fH+mNlv7L9y/6sn8Qhul7p8hCgROx3VMZiTqU03eK6ErvjDPBejsfALbYfRXIACeodctANkH2pVUEZmwo8ur68fV6nahHsXhhvQ0iNzGD/nmllVIVW+UOyziTvkvthLSR/mUIsWEmc2l7NR+/9tooJ4CaBYj2MmoZUUuFFjEaGq3OwGy4tLMNCSR04/NE0uPpk20/2LonD/hbbUDzg649F20BL/lXHcSsP2LpmyymfH/P3lemRqb8qxZAiEdkevCMf81GFv1rErbav74oERfSbPxPsZuZn6W0SPcEsfoHxaGBm1wYvGX/jWRl+Sl/iMLKMiAGjHOwYfn7lUWSq2OPtkhW7snSjdtw+f1zQys3SFbuAoXSjgCfwjc/IVlZ3h2SfGv7tY0/cnlkR2aBF7Q1XomdXqgaZZrQxpAy0H0nsQkT3xHdHmdhXJ+xQ8OQpg1QZX4mBEJ9Ju2XkFpMS3wixvGD0AJ3NsDSANM0W4nZaRVOmWa3GEYOeAmW5HnBY/wWD93g92FXgVW2uM8tHHFOlMLmkZ2AJf+wMAbw+EIrTBehXTyYBrZRxJ0lcVzQXk0cF6VG+gWnrtRwJ1GkedAcxWSXARzYf2AUpLkf0JUD6OolZcHE8N4RC3RVU6+AUKWJTTCgLIBnTNM8iGaAtrVo2rBra9EEdpkSoAbxaQtoWUCzBm04BLCvRPxGqxSxPcMEV5uNIHKO9Ch8QRHIVnR1z5sAtyB2/shq5/Nf7Cfcw/ZbEmD6igcny2B7nCxrUKDi+5bm+36A7/sXqfr+2pQ9GT6DbRende9/AFKBrH6dITzudDKrp3m/C+jFARsP7iE/j65pu1Xo0vf4a8Urlr0KJKNAlHaOOh3GAzABboxuc09Asl6+7UXy8zJSgNAcQisAsWZU1jHupIEhiTEkNo1Go+EhAbdrBkM/S9xsNpssvm6LDMNEjziLLl56ITCte9gw3cdciQCCcTqGjhyeTx+elmKhsKGLy5NevEoNdEtY8VEgdo5CrQdvj4Fsq5ywH6x78CR4ifhugPXOQIo+nYf+0VMBj57Lhr9buhvwbukYq+qTJyvBjsfe//E3nHM7AhADU7Xa2zz94c/+/OzgzMbvbdFGVj4bKP1z+edy2znUp3cQA6XrUBj65aBfOlZQyxSG//WIPzH2jvh06IOV3YmQAZRi0GLH7W6UVylBp6jZgQd2YHsEhg/AYXwtDckFQLq0wuMszSWH0wg8M3iYpR6rcgRDb1vUCHzYfAkq59ms6fAnnDR1wIGdwGyPB08mwHHdA82BOY85B31z5/N8GU7ZMH/oDdC/DYRjMOdkIAXAGPBhCjDwVjoLYzDnFfRB5A1qrZgacatG3BJsb+mDa7bF0m5kD6RNA/mDt7NtUndHJCyaIKy4Jawm1GiqF0/TRFjNbDcVecxEHtJupLMUyxVJA4RSan2hnugC4Vc99SrnizsU07qhxQ5YTNYtUa/vEZP1PUzWLQx44SGE/8qiSvCAvSeUGmFC7RNKDQulhtmrnP5meeCmq017+5eYPhbgLETWKdysCDvClW4V9Ic4FiRO6DL9oCejGLgUGyLbzjYFZWF1cfCrtPj13fO73Pt18tvUT5XaZIm9lq6GhRphYh9TSt0vhP6fx/OjEF6K39gSOsCsGD0kxkEP8lMgdiBxwoAzoDc5T9WFOM/Lygml1CYLqAkLmFIPlwNf/ppODAGynK15cinH64n0CLpaXYbkzrPF61Db+XeAyvU8LYBIT+T6i7fUQnZWz/m2XB/sPUveyPmumHCsB0nL5K0A7419DVeEa+9BuLL96WwHNr+Sp/zuXzaIPRtdqN98k1zbfwFi/lEZ0MjxGwAAAABJRU5ErkJggg==" alt="Web Design Shop" class="brand-image"/></a>
@@ -947,6 +964,7 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
     </div>
     </div>
     <section class="section home-hero">
+        <div class="wds-hero-brick-field" aria-hidden="true"></div>
         <div class="container">
             <div class="wrapper home-hero">
                 <div section="" class="hero-top">
@@ -2901,6 +2919,83 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
  if(reduced.addEventListener)reduced.addEventListener("change",schedule);
  if(window.IntersectionObserver){const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;schedule();},{threshold:.1});observer.observe(heading);}
  schedule();
+})();
+</script>
+<script id="wds-hero-brick-script">
+(function(){
+ const headerSpace=document.querySelector(".wds-sticky-header-space");
+ const nav=headerSpace&&headerSpace.querySelector(".navbar.w-nav");
+ function measureHeader(){
+  if(!nav)return;
+  const top=parseFloat(getComputedStyle(nav).top)||0;
+  const h=Math.ceil(nav.getBoundingClientRect().height+top);
+  if(h>0)document.documentElement.style.setProperty("--wds-header-space",h+"px");
+ }
+ if(nav){
+  measureHeader();
+  if("ResizeObserver" in window)new ResizeObserver(measureHeader).observe(nav);
+  window.addEventListener("resize",measureHeader,{passive:true});
+ }
+ const hero=document.querySelector(".section.home-hero");
+ const field=hero&&hero.querySelector(".wds-hero-brick-field");
+ if(!field)return;
+ const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
+ let bricks=[],raised=new Set(),frame=0,resizeFrame=0,pointer=null,lastW=0,lastH=0;
+ const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
+ function reset(){
+  if(frame)cancelAnimationFrame(frame);frame=0;pointer=null;
+  raised.forEach(b=>b.el.classList.remove("is-raised"));raised.clear();
+ }
+ function build(){
+  resizeFrame=0;
+  const w=field.clientWidth,h=field.clientHeight;
+  if(w===lastW&&h===lastH)return;
+  if(!w||!h)return;
+  lastW=w;lastH=h;reset();bricks=[];
+  const gap=5,bw=clamp(w/13,82,130),bh=bw*.56,stepX=bw+gap,stepY=bh+gap;
+  field.style.setProperty("--brick-w",bw+"px");field.style.setProperty("--brick-h",bh+"px");
+  const frag=document.createDocumentFragment();
+  for(let row=0;row<Math.ceil(h/stepY)+1;row++){
+   for(let x=-(row%2)*stepX/2-stepX/2;x<w;x+=stepX){
+    const y=row*stepY-gap,el=document.createElement("span");el.className="wds-hero-brick";
+    el.style.left=x+"px";el.style.top=y+"px";
+    frag.appendChild(el);bricks.push({el,x:x+bw/2,y:y+bh/2});
+   }
+  }
+  field.replaceChildren(frag);
+ }
+ function queueBuild(){if(!resizeFrame)resizeFrame=requestAnimationFrame(build);}
+ function draw(){
+  frame=0;if(!pointer||reduced.matches)return;
+  const rect=field.getBoundingClientRect(),x=pointer.x-rect.left,y=pointer.y-rect.top;
+  const radius=clamp(rect.width*.115,125,210),next=new Set();
+  for(const b of bricks){
+   const dx=x-b.x,dy=y-b.y,d=Math.hypot(dx,dy);
+   if(d>=radius)continue;
+   const strength=Math.pow(1-d/radius,1.35);
+   b.el.style.setProperty("--brick-lift",(-16*strength).toFixed(2)+"px");
+   b.el.style.setProperty("--brick-depth",(26*strength).toFixed(2)+"px");
+   b.el.style.setProperty("--brick-rx",clamp(-dy/radius*17,-12,12).toFixed(2)+"deg");
+   b.el.style.setProperty("--brick-ry",clamp(dx/radius*17,-12,12).toFixed(2)+"deg");
+   b.el.classList.add("is-raised");next.add(b);
+  }
+  raised.forEach(b=>{if(!next.has(b))b.el.classList.remove("is-raised");});raised=next;
+ }
+ function move(e){
+  if(reduced.matches||(e.pointerType!=="mouse"&&e.pointerType!=="pen"))return;
+  pointer={x:e.clientX,y:e.clientY};
+  if(!frame)frame=requestAnimationFrame(draw);
+ }
+ hero.addEventListener("pointermove",move,{passive:true});
+ hero.addEventListener("pointerleave",reset);
+ hero.addEventListener("pointercancel",reset);
+ window.addEventListener("scroll",reset,{passive:true});
+ window.addEventListener("blur",reset);
+ document.addEventListener("visibilitychange",()=>{if(document.hidden)reset();});
+ if(reduced.addEventListener)reduced.addEventListener("change",reset);
+ if("ResizeObserver" in window)new ResizeObserver(queueBuild).observe(field);
+ window.addEventListener("resize",queueBuild,{passive:true});
+ build();
 })();
 </script>
 </body>
