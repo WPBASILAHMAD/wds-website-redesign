@@ -355,6 +355,23 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
     color: #fff !important;
 }
 </style>
+<style id="wds-growth-brand-background">
+/* Replace the orange artwork on the inner growth card only. */
+.section.growth .revenue-block {
+    background-color: #f1f5fa !important;
+    background-image:
+        repeating-linear-gradient(90deg,transparent 0%,transparent 15.3%,#ffffff55 15.3%,#ffffff55 19.6%,transparent 19.6%,transparent 40%),
+        radial-gradient(ellipse at 10% 100%,#d9000024 0%,transparent 45%),
+        radial-gradient(ellipse at 85% 0%,#d900001c 0%,transparent 40%),
+        linear-gradient(110deg,#e7eef7 0%,#f8f9fc 35%,#e7eef7 63%,#f1f5fa 100%) !important;
+    background-size: cover;
+    background-position: center;
+    color: #0d0d0d;
+}
+.section.growth .revenue-top { justify-content: flex-start; }
+.section.growth .revenue-lightbox { display: none !important; }
+.section.growth .revenue-block :is(.cta-counter,.revenue-para,.revenue-desp) { color:#0d0d0d; }
+</style>
 </head>
 
 <body>
@@ -752,20 +769,7 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
                                 <h2 data-suffix="" data-counter="" data-count="2012" class="cta-counter big">2012</h2>
                             </div>
                             <p class="revenue-para">Building websites since</p>
-                        </div><a href="#" class="revenue-lightbox w-inline-block w-lightbox"><img src="https://cdn.prod.website-files.com/6a6bdef8f4ecd6b998614875/6a6bdef8f4ecd6b9986148ac_Pause%20Icon.webp" loading="lazy" alt="Pause Icon" class="pause-icon"/><script type="application/json" class="w-json">{
-  "items": [
-    {
-      "url": "https://youtube.com/watch?v=ReqrbLzq6yQ",
-      "originalUrl": "https://youtube.com/watch?v=ReqrbLzq6yQ",
-      "width": 940,
-      "height": 528,
-      "thumbnailUrl": "https://i.ytimg.com/vi/ReqrbLzq6yQ/hqdefault.jpg",
-      "html": "<iframe class=\"embedly-embed\" src=\"//cdn.embedly.com/widgets/media.html?src=https%3A%2F%2Fwww.youtube.com%2Fembed%2FReqrbLzq6yQ%3Ffeature%3Doembed&display_name=YouTube&url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DReqrbLzq6yQ&image=https%3A%2F%2Fi.ytimg.com%2Fvi%2FReqrbLzq6yQ%2Fhqdefault.jpg&type=text%2Fhtml&schema=youtube\" width=\"940\" height=\"528\" scrolling=\"no\" title=\"YouTube embed\" frameborder=\"0\" allow=\"autoplay; fullscreen; encrypted-media; picture-in-picture;\" allowfullscreen=\"true\"></iframe>",
-      "type": "video"
-    }
-  ],
-  "group": ""
-}</script></a></div>
+                        </div></div>
                     <p class="revenue-desp">A North American web design and SEO partner for growing businesses.</p>
                 </div>
                 <div section="" class="partner-marquee">
