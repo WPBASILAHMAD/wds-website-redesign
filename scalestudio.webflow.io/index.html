@@ -549,15 +549,25 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
 .behind-title img.behind-plus[src$="6a6bdef8f4ecd6b9986148b3_Plus.webp"]{filter:url(#wds-asterisk-navy)}
 </style>
 <style id="wds-scroll-wheel-style">
-/* Progressive enhancement: without JS, the original complete wheel remains visible. */
-#wds-wheel-scroll-track{width:100%;min-width:0;box-sizing:border-box;position:relative}
+/* Natural document flow: no sticky scroll spacer or artificial bottom padding. */
+#wds-wheel-scroll-track{width:100%;min-width:0;box-sizing:border-box;position:relative;padding-bottom:0}
+#wds-service-stage{min-height:0}
+#wds-service-stage .wds-channel-diagram{transform-origin:center center}
 #wds-service-stage[data-scroll-reveal="running"] .chart-text-box .wds-channel-trigger,
 #wds-service-stage[data-scroll-reveal="running"] .wds-channel-hub{pointer-events:none!important}
 #wds-service-stage[data-scroll-reveal="running"] .wds-channel-hub{box-shadow:none}
 #wds-service-stage[data-scroll-reveal="running"] .wds-service-hint{pointer-events:none}
-@media(min-width:1200px) and (min-height:760px) and (prefers-reduced-motion:no-preference){
- #wds-wheel-scroll-track.is-scroll-enabled{padding-bottom:clamp(320px,48vh,500px)}
- #wds-wheel-scroll-track.is-scroll-enabled #wds-service-stage{position:sticky;top:max(5rem,calc((100vh - 35rem)/2));top:max(5rem,calc((100svh - 35rem)/2))}
+#wds-service-stage[data-scroll-reveal="running"] .wds-service-rail{display:none!important}
+@media(min-width:768px) and (max-width:1199px){
+ #wds-service-stage .channel-bottom{width:min(100%,53rem)}
+ #wds-service-stage .wds-channel-diagram{width:min(535px,calc(100% - 19rem))}
+}
+@media(min-width:1200px){
+ #wds-service-stage{grid-template-columns:minmax(0,1fr) minmax(0,2.8fr) minmax(0,1fr)}
+ #wds-service-stage .wds-channel-diagram{width:min(560px,calc(100% - 15.5rem))}
+}
+@media(max-width:767px){
+ #wds-service-stage .channel-bottom{width:min(100%,390px)}
 }
 </style>
 </head>
@@ -2684,6 +2694,7 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
   el.addEventListener("blur",e=>{if(!pinned&&opener===el&&!el.matches(":hover"))close();});
  }
  bind(hub,-1);triggers.forEach(t=>bind(t,Number(t.dataset.serviceIndex)));
+ stage.addEventListener("wds:wheel-rewind",()=>close());
  stage.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse")close();});
  stage.addEventListener("focusout",e=>{if(pinned&&e.relatedTarget&&!stage.contains(e.relatedTarget))close();});
  document.addEventListener("pointerdown",e=>{if(mode!=="none"&&!stage.contains(e.target))close();});
@@ -2719,37 +2730,39 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
  const labels=Array.from(stage.querySelectorAll(".wds-channel-trigger"));
  const center=stage.querySelector(".wds-wheel-center");
  const hub=stage.querySelector(".wds-channel-hub");
+ const diagram=stage.querySelector(".wds-channel-diagram");
  const hint=stage.querySelector(".wds-service-hint");
- if(petals.length!==6||markers.length!==6||labels.length!==6||!center||!hub||!hint)return;
+ if(petals.length!==6||markers.length!==6||labels.length!==6||!center||!hub||!hint||!diagram)return;
  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)");
  const order=[5,0,1,2,3,4];
  const labelForPetal=[5,4,3,2,1,0];
  const clamp=x=>Math.max(0,Math.min(1,x));
  const smooth=x=>{x=clamp(x);return x*x*(3-2*x);};
  const around=s=>"translate(240 260) scale("+s.toFixed(4)+") translate(-240 -260)";
- let finished=false,frame=0;
- function finish(){
-  finished=true;
-  stage.dataset.scrollReveal="complete";
-  petals.concat(markers).forEach(el=>{el.removeAttribute("transform");el.removeAttribute("opacity");});
-  center.removeAttribute("transform");
-  labels.forEach(el=>{el.style.removeProperty("opacity");el.style.removeProperty("visibility");});
-  hub.style.removeProperty("transform");hint.style.removeProperty("opacity");
-  if(reduced.matches)track.classList.remove("is-scroll-enabled");
-  window.removeEventListener("scroll",queue);
-  window.removeEventListener("resize",queue);
- }
+ let frame=0,last=-1,keyboardOverride=false;
  function paint(p){
-  if(p>=1){finish();return;}
-  const logoGrow=smooth(p/.18);
-  const logoSettle=smooth((p-.18)/.24);
+  if(p===last)return;
+  last=p;
+  const state=p>=1?"complete":"running";
+  if(stage.dataset.scrollReveal!==state){
+   stage.dataset.scrollReveal=state;
+   if(state==="running")stage.dispatchEvent(new Event("wds:wheel-rewind"));
+  }
+  if(p>=1){
+   petals.concat(markers).forEach(el=>{el.removeAttribute("transform");el.removeAttribute("opacity");});
+   center.removeAttribute("transform");
+   labels.forEach(el=>{el.style.removeProperty("opacity");el.style.removeProperty("visibility");});
+   hub.style.removeProperty("transform");diagram.style.removeProperty("scale");hint.style.removeProperty("opacity");
+   return;
+  }
+  const logoGrow=smooth(p/.18),logoSettle=smooth((p-.18)/.24);
   const scale=.68+.48*logoGrow-.16*logoSettle;
   center.setAttribute("transform",around(scale));
   hub.style.transform="translate(-50%,-50%) scale("+scale.toFixed(4)+")";
+  diagram.style.scale=(.86+.14*smooth(p)).toFixed(4);
   order.forEach((petalIndex,i)=>{
    const start=.20+i*.108;
-   const local=smooth((p-start)/.20);
-   const alpha=smooth((p-start)/.11);
+   const local=smooth((p-start)/.20),alpha=smooth((p-start)/.11);
    const shape=petals[petalIndex],dot=markers[petalIndex],label=labels[labelForPetal[petalIndex]];
    const t=around(.12+.88*local);
    shape.setAttribute("transform",t);shape.setAttribute("opacity",alpha.toFixed(3));
@@ -2760,25 +2773,22 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
   hint.style.opacity=smooth((p-.90)/.10).toFixed(3);
  }
  function measure(){
-  frame=0;if(finished)return;
+  frame=0;
+  if(reduced.matches||keyboardOverride){paint(1);return;}
   const vh=window.innerHeight||document.documentElement.clientHeight;
-  const rect=track.getBoundingClientRect();
-  const stageStyle=window.getComputedStyle(stage);
-  const pinned=stageStyle.position==="sticky";
-  const start=vh*.78;
-  const stickyTop=parseFloat(stageStyle.top)||0;
-  const extra=parseFloat(window.getComputedStyle(track).paddingBottom)||0;
-  const end=pinned?stickyTop-extra*.82:vh*.18;
-  paint(clamp((start-rect.top)/Math.max(1,start-end)));
+  const top=track.getBoundingClientRect().top;
+  // Scroll down to assemble; scroll up across the same range to disassemble.
+  const start=vh*.88,end=vh*.13;
+  paint(clamp((start-top)/Math.max(1,start-end)));
  }
- function queue(){if(!finished&&!frame)frame=requestAnimationFrame(measure);}
- if(reduced.matches)return;
- stage.dataset.scrollReveal="running";
- track.classList.add("is-scroll-enabled");
- // Keyboard navigation always has immediate access to the full, static diagram.
- stage.addEventListener("focusin",function(){if(!finished)finish();},true);
- // The wheel stays assembled once the visitor has completed the reveal.
- if(reduced.addEventListener)reduced.addEventListener("change",e=>{if(e.matches)finish();});
+ function queue(){if(!frame)frame=requestAnimationFrame(measure);}
+ stage.addEventListener("focusin",function(e){
+  if(e.target.matches(":focus-visible")){keyboardOverride=true;paint(1);}
+ },true);
+ stage.addEventListener("focusout",function(e){
+  if(!stage.contains(e.relatedTarget)){keyboardOverride=false;queue();}
+ });
+ if(reduced.addEventListener)reduced.addEventListener("change",queue);
  window.addEventListener("scroll",queue,{passive:true});
  window.addEventListener("resize",queue,{passive:true});
  measure();
