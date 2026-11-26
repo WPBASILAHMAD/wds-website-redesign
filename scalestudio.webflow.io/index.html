@@ -257,6 +257,43 @@ body :is(.primary-button,.secondary-button,.check-button,.case-link,.password-bu
 .section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="orange-light"]{background-color:#d90000!important;color:#fff!important}
 .section.cta .cta-buttons .primary-button[data-wf--primary-button--variant="orange-light"] :is(.button-text,.button-arrow,.button-arrows,.button-texts){color:#fff!important}
 </style>
+<style id="wds-orange-palette-update">
+/* Global accent replacements; keep the original soft-orange token unchanged. */
+:root {
+    --_colors---background-color--orange: #d90000;
+    --_colors---background-color--orange-light: #c4a5f6;
+    --wds-accent-purple: #7029d9;
+}
+/* Preserve original orange accents in the rating and testimonial sections. */
+.section.success-rating,
+section[data-wf--testimonials-section--variant] {
+    --_colors---background-color--orange: #ff5100;
+    --_colors---background-color--orange-light: #ff933d;
+}
+/* Replace the hard-coded orange highlight shadow without changing its geometry. */
+.measurable {
+    box-shadow: inset 0 4px 14px #c4a5f680;
+}
+/* Purple for former light-orange primary CTAs; existing hero/final CTA red
+   overrides and global red hover treatment remain in effect. */
+body .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)) {
+    background-color: var(--wds-accent-purple);
+    color: #fff;
+}
+body .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)) :is(.button-text,.button-arrow,.button-arrows,.button-texts) {
+    color: #fff;
+}
+/* Preserve the original light-orange CTA inside the rating sections, if present. */
+.section.success-rating .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)),
+section[data-wf--testimonials-section--variant] .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)) {
+    background-color: #ff933d;
+    color: #0d0d0d;
+}
+.section.success-rating .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)) :is(.button-text,.button-arrow,.button-arrows,.button-texts),
+section[data-wf--testimonials-section--variant] .primary-button[data-wf--primary-button--variant="orange-light"]:not(:is(:hover,:focus-visible)) :is(.button-text,.button-arrow,.button-arrows,.button-texts) {
+    color: #0d0d0d;
+}
+</style>
 </head>
 
 <body>
