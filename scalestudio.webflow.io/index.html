@@ -599,12 +599,28 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
 }
 </style>
 <style id="wds-hero-rotation-style">
-.navbar .nav-buttton-wrap[hidden]{display:none!important}
+.navbar .w-commerce-commercecartwrapper.cart[hidden]{display:none!important}
+.navbar .nav-buttton-wrap{display:flex!important;align-items:center;gap:.75rem;flex:none}
+.navbar .nav-btn-wrap{display:flex!important;align-items:center;flex:none}
+.navbar .wds-header-mail-icon{display:none}
+@media(min-width:992px) and (max-width:1199px){
+ .navbar .nav-wrapper{gap:.5rem}
+ .navbar .navbar-left-wrap{gap:.75rem}
+ .navbar .wds-header-email{padding:.8rem .85rem;font-size:.875rem}
+}
+@media(max-width:600px){
+ .navbar .wds-header-email{width:2.5rem;height:2.5rem;padding:0;display:grid;place-items:center}
+ .navbar .wds-header-email .button-arrows,.navbar .wds-header-email .button-texts{display:none!important}
+ .navbar .wds-header-mail-icon{display:block;position:relative;z-index:2}
+ .navbar .nav-buttton-wrap{gap:.4rem}
+ .navbar .nav-wrapper{gap:.4rem}
+}
 .section.home-hero .performance-icon{filter:url(#wds-asterisk-navy)!important}
-.section.home-hero .wds-hero-headline{width:100%;max-width:100%;margin-inline:auto}
+.section.home-hero .wrapper.home-hero{width:100%;max-width:64rem;container-type:inline-size}
+.section.home-hero .wds-hero-headline{width:100%;max-width:100%;margin-inline:auto;font-size:clamp(1rem,6vw,5.375rem);font-size:clamp(1rem,8.2cqi,5.375rem);line-height:1.04;letter-spacing:-.045em}
 .wds-hero-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-.wds-hero-fixed,.wds-hero-audience{display:block}
-.wds-hero-word-stack{display:inline-grid;grid-template-columns:1fr;vertical-align:baseline;text-align:left;max-width:100%;align-items:baseline;isolation:isolate}
+.wds-hero-fixed,.wds-hero-audience{display:block;white-space:nowrap;text-align:center}
+.wds-hero-word-stack{display:grid;grid-template-columns:minmax(0,1fr);width:100%;text-align:center;align-items:baseline;isolation:isolate}
 .wds-hero-word{grid-area:1/1;visibility:hidden;opacity:0;transform:translateY(.22em);white-space:nowrap;color:#0d0d0d;transition:opacity .28s ease,transform .4s cubic-bezier(.2,.7,.25,1),visibility 0s linear .4s}
 .wds-hero-word.is-active{visibility:visible;opacity:1;transform:translateY(0);transition:opacity .32s ease,transform .4s cubic-bezier(.2,.7,.25,1),visibility 0s}
 .wds-hero-motion-control[hidden]{display:none!important}
@@ -613,8 +629,6 @@ img.sub-arrow[src$="6a6bdef8f4ecd6b9986148c5_Arrow.png"]{filter:url(#wds-asteris
 .wds-hero-motion-control:focus-visible{outline:2px solid #122c4e;outline-offset:3px}
 .wds-hero-motion-control .wds-hero-play,.wds-hero-motion-control[aria-pressed="true"] .wds-hero-pause{display:none}
 .wds-hero-motion-control[aria-pressed="true"] .wds-hero-play{display:block}
-@media(max-width:991px){.section.home-hero .wds-hero-headline{font-size:clamp(2.5rem,6.6vw,4.25rem)}}
-@media(max-width:600px){.section.home-hero .wds-hero-headline{font-size:clamp(2rem,8vw,2.75rem)}.wds-hero-audience .blue-text{display:block}.wds-hero-word-stack{text-align:center}}
 @media(prefers-reduced-motion:reduce){.wds-hero-word{transition:none!important;transform:none!important}.wds-hero-motion-control{display:none!important}}
 </style>
 <style id="wds-hero-brick-style">
@@ -626,13 +640,13 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
 /* Soft white masonry, isolated behind the original hero content. */
 .section.home-hero{position:relative;isolation:isolate;overflow:hidden;background:#fff}
 .section.home-hero>.container{position:relative;z-index:1}
-.wds-hero-brick-field{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#f4f5f7;perspective:750px;mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 87%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 12%,#000 87%,transparent 100%)}
+.wds-hero-brick-field{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#fbfbfc;perspective:1000px;mask-image:linear-gradient(to bottom,transparent 0%,#000 24%,#000 76%,transparent 100%);-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 24%,#000 76%,transparent 100%)}
 .wds-hero-brick-field:empty{background:none}
-.wds-hero-brick-field::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,#ffffffa6 0%,#ffffff55 35%,#ffffff00 75%);pointer-events:none;z-index:2}
-.wds-hero-brick{position:absolute;box-sizing:border-box;width:var(--brick-w);height:var(--brick-h);border:1px solid #e5e8ec;border-radius:5px;background:linear-gradient(150deg,#fff 12%,#fcfcfd 65%,#f6f7f9);box-shadow:0 2px 0 #e3e6eb,0 3px 6px #122c4e08,inset 0 1px 1px #fff;transform:translate3d(0,0,0);transform-origin:center;transition:transform .55s cubic-bezier(.2,.7,.25,1),box-shadow .45s ease;}
-.wds-hero-brick.is-raised{z-index:1;transform:translate3d(0,var(--brick-lift),var(--brick-depth)) rotateX(var(--brick-rx)) rotateY(var(--brick-ry));box-shadow:0 4px 0 #dfe4ea,0 10px 18px #122c4e1c,inset 0 1px 1px #fff;transition-duration:.15s,.18s}
-@media(max-width:767px){.wds-hero-brick-field{opacity:.65}.wds-hero-brick-field::after{background:radial-gradient(ellipse at center,#ffffffc9,#ffffff44 70%,transparent)}}
-@media(prefers-reduced-motion:reduce){.wds-hero-brick,.wds-hero-brick.is-raised{transform:none!important;transition:none!important;box-shadow:0 2px 0 #e3e6eb,0 3px 6px #122c4e08}}
+.wds-hero-brick-field::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#ffffff20 0%,#ffffffcc 23%,#fff 36%,#fff 64%,#ffffffcc 77%,#ffffff20 100%);pointer-events:none;z-index:2}
+.wds-hero-brick{position:absolute;box-sizing:border-box;width:var(--brick-w);height:var(--brick-h);border:1px solid #f1f2f4;border-radius:7px;background:linear-gradient(145deg,#fff 15%,#fdfdfe 85%);box-shadow:0 1px 1px #122c4e06;transform:translate3d(0,0,0);transform-origin:center;transition:transform .5s cubic-bezier(.2,.7,.25,1),box-shadow .4s ease}
+.wds-hero-brick.is-raised{z-index:1;transform:translate3d(0,var(--brick-lift),var(--brick-depth)) rotateX(var(--brick-rx)) rotateY(var(--brick-ry));box-shadow:0 2px 0 #e8ebee,0 5px 12px #122c4e0d;transition-duration:.2s,.25s}
+@media(max-width:767px){.wds-hero-brick-field{opacity:.35}.wds-hero-brick-field::after{background:linear-gradient(90deg,transparent,#fff 22%,#fff 78%,transparent)}}
+@media(prefers-reduced-motion:reduce){.wds-hero-brick,.wds-hero-brick.is-raised{transform:none!important;transition:none!important;box-shadow:0 1px 1px #122c4e06}}
 </style>
 </head>
 
@@ -747,7 +761,7 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
                                 </div>
                                 </nav>
                         </div>
-                        <div class="nav-buttton-wrap" hidden aria-hidden="true">
+                        <div class="nav-buttton-wrap">
                             <div data-open-product="" data-wf-cart-type="modal" data-wf-cart-query="query Dynamo3 {
   database {
     id
@@ -870,7 +884,7 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
       quickCheckoutEnabled
     }
   }
-}" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart" data-node-type="commerce-cart-wrapper"><a class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart" data-node-type="commerce-cart-open-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="cart-icon"><path d="M16.0004 9V6C16.0004 3.79086 14.2095 2 12.0004 2C9.79123 2 8.00037 3.79086 8.00037 6V9M3.59237 10.352L2.99237 16.752C2.82178 18.5717 2.73648 19.4815 3.03842 20.1843C3.30367 20.8016 3.76849 21.3121 4.35839 21.6338C5.0299 22 5.94374 22 7.77142 22H16.2293C18.057 22 18.9708 22 19.6423 21.6338C20.2322 21.3121 20.6971 20.8016 20.9623 20.1843C21.2643 19.4815 21.179 18.5717 21.0084 16.752L20.4084 10.352C20.2643 8.81535 20.1923 8.04704 19.8467 7.46616C19.5424 6.95458 19.0927 6.54511 18.555 6.28984C17.9444 6 17.1727 6 15.6293 6L8.37142 6C6.82806 6 6.05638 6 5.44579 6.28984C4.90803 6.54511 4.45838 6.95458 4.15403 7.46616C3.80846 8.04704 3.73643 8.81534 3.59237 10.352Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="cart-hide w-inline-block">Cart</div><div class="w-commerce-commercecartopenlinkcount cart-quantity">0</div></a>
+}" data-wf-page-link-href-prefix="" class="w-commerce-commercecartwrapper cart" data-node-type="commerce-cart-wrapper" hidden aria-hidden="true"><a class="w-commerce-commercecartopenlink cart-button w-inline-block" role="button" aria-haspopup="dialog" aria-label="Open cart" data-node-type="commerce-cart-open-link" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 24 24" fill="none" class="cart-icon"><path d="M16.0004 9V6C16.0004 3.79086 14.2095 2 12.0004 2C9.79123 2 8.00037 3.79086 8.00037 6V9M3.59237 10.352L2.99237 16.752C2.82178 18.5717 2.73648 19.4815 3.03842 20.1843C3.30367 20.8016 3.76849 21.3121 4.35839 21.6338C5.0299 22 5.94374 22 7.77142 22H16.2293C18.057 22 18.9708 22 19.6423 21.6338C20.2322 21.3121 20.6971 20.8016 20.9623 20.1843C21.2643 19.4815 21.179 18.5717 21.0084 16.752L20.4084 10.352C20.2643 8.81535 20.1923 8.04704 19.8467 7.46616C19.5424 6.95458 19.0927 6.54511 18.555 6.28984C17.9444 6 17.1727 6 15.6293 6L8.37142 6C6.82806 6 6.05638 6 5.44579 6.28984C4.90803 6.54511 4.45838 6.95458 4.15403 7.46616C3.80846 8.04704 3.73643 8.81534 3.59237 10.352Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><div class="cart-hide w-inline-block">Cart</div><div class="w-commerce-commercecartopenlinkcount cart-quantity">0</div></a>
                                 <div
                                     style="display:none" class="w-commerce-commercecartcontainerwrapper w-commerce-commercecartcontainerwrapper--cartType-modal" data-node-type="commerce-cart-container-wrapper">
                                     <div data-node-type="commerce-cart-container" role="dialog" class="w-commerce-commercecartcontainer">
@@ -935,7 +949,7 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
                     </div>
                 </div>
                 <div class="nav-btn-wrap">
-                    <a href="mailto:info@webdesignshop.com?subject=info%40webdesignshop.com" data-wf--primary-button--variant="base" class="primary-button w-inline-block">
+                    <a href="mailto:info@webdesignshop.com?subject=info%40webdesignshop.com" data-wf--primary-button--variant="base" aria-label="Email info@webdesignshop.com" class="primary-button w-inline-block wds-header-email"><svg class="wds-header-mail-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
                         <div class="button-arrows v2"><svg xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="button-arrow _02"><path d="M4.16634 10L15.833 10M15.833 10L9.99968 4.16671M15.833 10L9.99968 15.8334" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 20 20" fill="none" class="button-arrow _01">
@@ -975,7 +989,7 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
                             <p class="performance-agency">White label partner</p>
                         </div><button type="button" class="wds-hero-motion-control" aria-label="Pause headline animation" aria-pressed="false" hidden><svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" aria-hidden="true"><path class="wds-hero-pause" d="M4 3h3v10H4zm5 0h3v10H9z"/><path class="wds-hero-play" d="M5 3l8 5-8 5z"/></svg></button>
                     </div>
-                    <h1 class="dominate-text wds-hero-headline"><span class="wds-hero-sr">Digital growth. Built for agencies, businesses, startups and Gen Z brands.</span><span aria-hidden="true" class="wds-hero-fixed">Digital growth.</span><span aria-hidden="true" class="wds-hero-audience"><span class="blue-text">Built for</span> <span class="wds-hero-word-stack"><span class="wds-hero-word is-active">Agencies.</span><span class="wds-hero-word">Businesses.</span><span class="wds-hero-word">Startups.</span><span class="wds-hero-word">Gen Z brands.</span></span></span></h1>
+                    <h1 class="dominate-text wds-hero-headline"><span class="wds-hero-sr">Digital growth. Built for agencies, businesses, startups and Gen Z brands.</span><span aria-hidden="true" class="wds-hero-fixed">Digital growth.</span><span aria-hidden="true" class="wds-hero-audience"><span class="wds-hero-word-stack"><span class="wds-hero-word is-active"><span class="blue-text">Built for</span> Agencies.</span><span class="wds-hero-word"><span class="blue-text">Built for</span> Businesses.</span><span class="wds-hero-word"><span class="blue-text">Built for</span> Startups.</span><span class="wds-hero-word"><span class="blue-text">Built for</span> Gen Z brands.</span></span></span></h1>
                     <p class="marketing-para">Website design and search marketing for agencies and growing businesses.</p>
                     <div class="hero-buttons v1">
                         <a href="https://webdesignshop.com/contact/" data-wf--primary-button--variant="orange-light" class="primary-button w-variant-78214eb8-baca-ebb7-1f29-f0a504de6f4a w-inline-block">
@@ -2952,7 +2966,7 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
   if(w===lastW&&h===lastH)return;
   if(!w||!h)return;
   lastW=w;lastH=h;reset();bricks=[];
-  const gap=5,bw=clamp(w/13,82,130),bh=bw*.56,stepX=bw+gap,stepY=bh+gap;
+  const gap=7,bw=clamp(w/9,110,180),bh=bw*.60,stepX=bw+gap,stepY=bh+gap;
   field.style.setProperty("--brick-w",bw+"px");field.style.setProperty("--brick-h",bh+"px");
   const frag=document.createDocumentFragment();
   for(let row=0;row<Math.ceil(h/stepY)+1;row++){
@@ -2973,10 +2987,10 @@ button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause servic
    const dx=x-b.x,dy=y-b.y,d=Math.hypot(dx,dy);
    if(d>=radius)continue;
    const strength=Math.pow(1-d/radius,1.35);
-   b.el.style.setProperty("--brick-lift",(-16*strength).toFixed(2)+"px");
-   b.el.style.setProperty("--brick-depth",(26*strength).toFixed(2)+"px");
-   b.el.style.setProperty("--brick-rx",clamp(-dy/radius*17,-12,12).toFixed(2)+"deg");
-   b.el.style.setProperty("--brick-ry",clamp(dx/radius*17,-12,12).toFixed(2)+"deg");
+   b.el.style.setProperty("--brick-lift",(-6*strength).toFixed(2)+"px");
+   b.el.style.setProperty("--brick-depth",(12*strength).toFixed(2)+"px");
+   b.el.style.setProperty("--brick-rx",clamp(-dy/radius*8,-6,6).toFixed(2)+"deg");
+   b.el.style.setProperty("--brick-ry",clamp(dx/radius*8,-6,6).toFixed(2)+"deg");
    b.el.classList.add("is-raised");next.add(b);
   }
   raised.forEach(b=>{if(!next.has(b))b.el.classList.remove("is-raised");});raised=next;
