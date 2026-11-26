@@ -232,6 +232,20 @@
 @media(max-width:767px){.footer .footer-top .brand-logo.w-nav-brand{width:15rem;max-width:100%}}
 @media(max-width:479px){.footer .footer-top .brand-logo.w-nav-brand{width:13rem}}
 </style>
+<style id="wds-brand-button-colors">
+:root{--wds-button-red:#d90000;--wds-button-white:#fff}
+.home-hero .hero-buttons .primary-button[data-wf--primary-button--variant="orange-light"]{background-color:var(--wds-button-red)!important;color:var(--wds-button-white)!important}
+.home-hero .hero-buttons .primary-button[data-wf--primary-button--variant="orange-light"] :is(.button-text,.button-arrow,.button-arrows,.button-texts){color:var(--wds-button-white)!important}
+body .primary-button .button-bg{background-color:var(--wds-button-red)!important}
+body .primary-button{transition:background-color .25s ease,color .2s ease}
+body .primary-button:is(:hover,:focus-visible){background-color:var(--wds-button-red)!important;color:var(--wds-button-white)!important;transition:background-color .25s ease .18s,color .2s ease}
+body .primary-button:is(:hover,:focus-visible) :is(.button-text,.button-arrow,.button-arrows,.button-texts){color:var(--wds-button-white)!important}
+body :is(.secondary-button,.check-button,.case-link,.password-button,.pricing-tab,.social-link,.team-social,.cart-button,.close-button,.remove-button,.revenue-lightbox,.menu-button,.w-button,button,input[type="submit"]){transition-property:background-color,color,border-color;transition-duration:.25s;transition-timing-function:ease}
+body :is(.secondary-button,.check-button,.case-link,.password-button,.pricing-tab,.social-link,.team-social,.cart-button,.close-button,.remove-button,.revenue-lightbox,.menu-button,.w-button,button,input[type="submit"]):is(:hover,:focus-visible){background-color:var(--wds-button-red)!important;color:var(--wds-button-white)!important}
+body :is(.secondary-button,.check-button,.case-link,.password-button,.pricing-tab,.social-link,.team-social,.cart-button,.close-button,.remove-button,.revenue-lightbox,.menu-button,.w-button,button):is(:hover,:focus-visible) :is(.button-text,.button-arrow,.secondary-arrow,.check-arrow,.case-arrow,.social-icon,.button-arrows,.button-texts,svg,p,span){color:var(--wds-button-white)!important}
+body .secondary-button:is(:hover,:focus-visible){border-radius:.375rem}
+body :is(.primary-button,.secondary-button,.check-button,.case-link,.password-button,.pricing-tab,.social-link,.team-social,.cart-button,.close-button,.remove-button,.revenue-lightbox,.menu-button,.w-button,button,input[type="submit"]):focus-visible{outline:2px solid var(--wds-button-red);outline-offset:3px}
+</style>
 </head>
 
 <body>
