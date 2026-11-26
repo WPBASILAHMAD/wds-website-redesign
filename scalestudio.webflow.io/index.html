@@ -395,6 +395,36 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
 @media(max-width:767px){.section.growth .revenue-block{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;row-gap:1.75rem}.section.growth .revenue-top{grid-column:1;grid-row:1}.section.growth .revenue-desp{grid-column:1;grid-row:2}.section.growth .wds-growth-scroller{grid-column:1;grid-row:3;min-height:14rem}.wds-growth-service{font-size:clamp(1.8rem,5vw,2.6rem);min-height:5.5rem}}
 @media(prefers-reduced-motion:reduce){.wds-growth-track{animation:none!important;transform:none!important;will-change:auto}.wds-growth-group+.wds-growth-group,.wds-growth-group .wds-growth-service:nth-child(n+3),.wds-growth-pause{display:none}.wds-growth-scroller-window{mask-image:none;-webkit-mask-image:none}.wds-growth-service{min-height:0;padding:.7rem .25rem}}
 </style>
+<link id="wds-growth-handwriting-font" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&amp;display=swap">
+<style id="wds-growth-handwriting">
+/* Only the growth service marquee uses the handwritten typeface. */
+.section.growth .wds-growth-scroller-window { gap:clamp(.4rem,1vw,.85rem); }
+.section.growth .wds-growth-lane { container-type:inline-size; }
+.section.growth .wds-growth-service {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:5.5rem;
+    padding:.5rem .15rem;
+    font-family:"Caveat","Segoe Print","Bradley Hand",cursive;
+    font-size:clamp(1rem,2.1vw,1.9rem);
+    font-size:clamp(.8rem,17cqi,1.9rem);
+    line-height:1.15;
+    font-weight:700;
+    letter-spacing:-.025em;
+    white-space:nowrap;
+    overflow-wrap:normal;
+    word-break:normal;
+    text-align:center;
+}
+.section.growth .wds-growth-service span { flex:none; }
+@media(max-width:767px){
+    .section.growth .wds-growth-service { min-height:4.5rem; }
+}
+@media(prefers-reduced-motion:reduce){
+    .section.growth .wds-growth-service { min-height:0;padding:.7rem .15rem; }
+}
+</style>
 </head>
 
 <body>
@@ -795,7 +825,7 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
                         </div></div>
                     <p class="revenue-desp">A North American web design and SEO partner for growing businesses.</p>
                     <div class="wds-growth-scroller" id="wds-growth-service-marquee" role="region" aria-label="Our services: Web Design, Search Engine Optimization, Local SEO and Social Media">
-                        <div class="wds-growth-scroller-window"><div class="wds-growth-lane" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div></div></div></div><div class="wds-growth-lane is-reverse" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div></div></div></div></div>
+                        <div class="wds-growth-scroller-window"><div class="wds-growth-lane" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">Web Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local SEO<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">Web Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local SEO<span aria-hidden="true">.</span></div></div></div></div><div class="wds-growth-lane is-reverse" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social Media<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social Media<span aria-hidden="true">.</span></div></div></div></div></div>
                         <button class="wds-growth-pause" type="button" aria-label="Pause service scrolling" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path class="wds-pause-symbol" d="M4 3h3v10H4zm5 0h3v10H9z"/><path class="wds-play-symbol" d="M5 3l8 5-8 5z"/></svg></button>
                     </div>
                 </div>
