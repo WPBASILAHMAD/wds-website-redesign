@@ -372,6 +372,29 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
 .section.growth .revenue-lightbox { display: none !important; }
 .section.growth .revenue-block :is(.cta-counter,.revenue-para,.revenue-desp) { color:#0d0d0d; }
 </style>
+<style id="wds-growth-service-marquee-style">
+.section.growth .revenue-block {display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);grid-template-rows:auto auto;column-gap:clamp(1.5rem,3vw,2.5rem);align-items:start;}
+.section.growth .revenue-top {grid-column:1;grid-row:1;min-width:0;}
+.section.growth .revenue-desp {grid-column:1;grid-row:2;align-self:end;min-width:0;}
+.section.growth .wds-growth-scroller {grid-column:2;grid-row:1 / 3;align-self:stretch;position:relative;min-width:0;min-height:0;isolation:isolate;overflow:hidden;}
+.wds-growth-scroller-window {position:absolute;inset:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(.5rem,1.25vw,1rem);overflow:hidden;-webkit-mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 87%,transparent 100%);mask-image:linear-gradient(to bottom,transparent 0%,#000 13%,#000 87%,transparent 100%);}
+.wds-growth-lane {min-width:0;overflow:hidden;position:relative;}
+.wds-growth-track {display:flex;flex-direction:column;animation:wds-growth-vertical 23s linear infinite;will-change:transform;}
+.wds-growth-lane.is-reverse .wds-growth-track {animation-direction:reverse;animation-duration:27s;animation-delay:-7s;}
+.wds-growth-group {display:flex;flex-direction:column;flex:none;}
+.wds-growth-service {box-sizing:border-box;display:block;min-height:6.5rem;padding:.65rem .25rem;align-content:center;text-align:left;font-family:inherit;font-size:clamp(1.65rem,3vw,2.65rem);line-height:.98;font-weight:650;letter-spacing:-.055em;color:#122c4e;overflow-wrap:normal;}
+.wds-growth-service.is-muted {color:#36577e;}
+.wds-growth-service span {color:#d90000;}
+@keyframes wds-growth-vertical {from{transform:translateY(0)}to{transform:translateY(-50%)}}
+.wds-growth-scroller:hover .wds-growth-track,.wds-growth-scroller:focus-within .wds-growth-track,.wds-growth-scroller.is-paused .wds-growth-track {animation-play-state:paused;}
+.wds-growth-pause {position:absolute;right:.25rem;bottom:.25rem;width:2rem;height:2rem;border:1px solid #122c4e24;border-radius:50%;display:grid;place-items:center;background:#ffffffd9;color:#122c4e;cursor:pointer;z-index:1;}
+.wds-growth-pause .wds-play-symbol {display:none;}
+.wds-growth-scroller.is-paused .wds-pause-symbol {display:none;}
+.wds-growth-scroller.is-paused .wds-play-symbol {display:block;}
+@media(max-width:991px){.section.growth .revenue-block{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:1.25rem}.wds-growth-service{font-size:clamp(1.4rem,3.2vw,2.15rem);min-height:5.5rem}.section.growth .revenue-top .cta-counter.big{font-size:clamp(3.5rem,10vw,7rem)}}
+@media(max-width:767px){.section.growth .revenue-block{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;row-gap:1.75rem}.section.growth .revenue-top{grid-column:1;grid-row:1}.section.growth .revenue-desp{grid-column:1;grid-row:2}.section.growth .wds-growth-scroller{grid-column:1;grid-row:3;min-height:14rem}.wds-growth-service{font-size:clamp(1.8rem,5vw,2.6rem);min-height:5.5rem}}
+@media(prefers-reduced-motion:reduce){.wds-growth-track{animation:none!important;transform:none!important;will-change:auto}.wds-growth-group+.wds-growth-group,.wds-growth-group .wds-growth-service:nth-child(n+3),.wds-growth-pause{display:none}.wds-growth-scroller-window{mask-image:none;-webkit-mask-image:none}.wds-growth-service{min-height:0;padding:.7rem .25rem}}
+</style>
 </head>
 
 <body>
@@ -771,6 +794,10 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
                             <p class="revenue-para">Building websites since</p>
                         </div></div>
                     <p class="revenue-desp">A North American web design and SEO partner for growing businesses.</p>
+                    <div class="wds-growth-scroller" id="wds-growth-service-marquee" role="region" aria-label="Our services: Web Design, Search Engine Optimization, Local SEO and Social Media">
+                        <div class="wds-growth-scroller-window"><div class="wds-growth-lane" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service">Web<br>Design<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Local<br>SEO<span aria-hidden="true">.</span></div></div></div></div><div class="wds-growth-lane is-reverse" aria-hidden="true"><div class="wds-growth-track"><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div></div><div class="wds-growth-group"><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div><div class="wds-growth-service">SEO<span aria-hidden="true">.</span></div><div class="wds-growth-service is-muted">Social<br>Media<span aria-hidden="true">.</span></div></div></div></div></div>
+                        <button class="wds-growth-pause" type="button" aria-label="Pause service scrolling" aria-pressed="false"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path class="wds-pause-symbol" d="M4 3h3v10H4zm5 0h3v10H9z"/><path class="wds-play-symbol" d="M5 3l8 5-8 5z"/></svg></button>
+                    </div>
                 </div>
                 <div section="" class="partner-marquee">
                     <p class="partner-text">Your digital partner <span class="muted-clay">focused on results</span></p>
@@ -2473,6 +2500,18 @@ body .w-commerce-commercecartcontainer :is(.w-commerce-commercecartcheckoutbutto
 })();
 </script>
 <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none"><defs><filter id="wds-orange-icon-to-red" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 .14902 0 .85098  0 0 1 0 0  0 0 1 0 0  0 0 0 1 0"/></filter><filter id="wds-blue-icon-to-navy" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0.92941176 0 0 0.07058824  0 0.82745098 0 0 0.17254902  0 0.69411765 0 0 0.30588235  0 0 0 1 0"/></filter></defs></svg>
+<script id="wds-growth-service-marquee-script">
+(function(){
+const root=document.getElementById("wds-growth-service-marquee");
+if(!root)return;
+const button=root.querySelector(".wds-growth-pause");
+button.addEventListener("click",function(){
+const paused=root.classList.toggle("is-paused");
+button.setAttribute("aria-pressed",String(paused));
+button.setAttribute("aria-label",paused?"Resume service scrolling":"Pause service scrolling");
+});
+})();
+</script>
 </body>
 
 </html>
