@@ -14,13 +14,13 @@
 @media(min-width:1200px){
  #wds-service-stage .channel-bottom{grid-column:2;width:100%}
  #wds-service-stage .wds-channel-diagram{width:min(520px,calc(100% - 16rem),max(260px,var(--wds-wheel-height-cap)))}
- #wds-service-stage[data-mode="none"] .channel-bottom{grid-column:1/-1;width:min(100%,58rem)}
- #wds-service-stage[data-mode="none"] .wds-channel-diagram{width:min(520px,calc(100% - 19rem),max(260px,var(--wds-wheel-height-cap)))}
 }
 /* Keep the assembled diagram in view as the scroll reveal completes. */
 @media(min-width:768px) and (min-height:620px) and (prefers-reduced-motion:no-preference){
- #wds-wheel-scroll-track{padding-bottom:var(--wds-wheel-runway)}
+ #wds-wheel-scroll-track{padding-bottom:2rem}
+ #wds-wheel-scroll-track::after{content:"";display:block;height:var(--wds-wheel-runway);pointer-events:none}
  #wds-service-stage{position:sticky;top:var(--wds-wheel-top)}
+ #wds-service-stage .wds-service-rail{max-height:calc(100svh - var(--wds-header-space,5rem) - 4rem);overflow:auto;overscroll-behavior:contain}
 }
 @media(max-width:767px){
  #wds-wheel-scroll-track{padding-block:1.5rem 2.5rem}

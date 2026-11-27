@@ -65,7 +65,8 @@
    const pinTop=parseFloat(stageStyle.top)||0;
    // Start just before the stage settles below the header; finish before the runway ends.
    const start=pinTop-padTop+Math.min(72,vh*.10);
-   const distance=Math.max(160,padBottom*.73);
+   const runway=parseFloat(getComputedStyle(track,"::after").height)||padBottom;
+   const distance=Math.max(160,runway*.73);
    target=clamp((start-rect.top)/distance);
   }else{
    const start=vh*.90,end=Math.max(vh*.27,(parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--wds-header-space"))||80)+24);
