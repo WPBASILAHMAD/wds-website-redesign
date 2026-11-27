@@ -1,0 +1,14 @@
+export const metadata = {
+  title: "Web Design Shop",
+  description: "Website design, SEO and digital marketing for agencies and businesses.",
+  icons: {icon:"/favicon.png",apple:"/favicon.png"}
+};
+export default function RootLayout({children}) {
+  return <html lang="en"><head>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
+    <link rel="stylesheet" href="/wds-site.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700&family=Manrope:wght@300;400;500;600;700&display=swap"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap"/>
+  </head><body>{children}</body></html>;
+}

@@ -1,0 +1,5 @@
+# Web Design Shop — Next.js migration
+
+Next.js App Router. Existing homepage and About page use server-rendered, trusted markup to preserve the approved design and original SVG/CSS geometry. GSAP and page scripts are local and loaded in original order after hydration. Ordinary anchor navigation deliberately performs full document loads while the legacy DOM interactions are retained. No Webflow runtime, ecommerce runtime, validator, or template review script is included in the migration tree. Existing licensed assets that are present in Git are served locally; remaining remote images retain their source URLs. External WDS links are preserved except for explicit local route repairs.
+
+Run `npm install`, then `npm run dev` or `npm run build`. Routes: / and /about (legacy /about-us.html, /about-us and /index.html are rewritten). Missing content routes are not fabricated. This is the visual-parity migration stage, not a full semantic React component refactor. Before production promotion, compare desktop/mobile screenshots and verify GSAP scroll behavior, menus, pricing tabs, FAQ, and no unexpected navigation.
