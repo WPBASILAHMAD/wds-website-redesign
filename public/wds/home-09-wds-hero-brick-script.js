@@ -1,18 +1,5 @@
 
 (function(){
- const headerSpace=document.querySelector(".wds-sticky-header-space");
- const nav=headerSpace&&headerSpace.querySelector(".navbar.w-nav");
- function measureHeader(){
-  if(!nav)return;
-  const top=parseFloat(getComputedStyle(nav).top)||0;
-  const h=Math.ceil(nav.getBoundingClientRect().height+top);
-  if(h>0)document.documentElement.style.setProperty("--wds-header-space",h+"px");
- }
- if(nav){
-  measureHeader();
-  if("ResizeObserver" in window)new ResizeObserver(measureHeader).observe(nav);
-  window.addEventListener("resize",measureHeader,{passive:true});
- }
  const hero=document.querySelector(".section.home-hero");
  const field=hero&&hero.querySelector(".wds-hero-brick-field");
  if(!field)return;

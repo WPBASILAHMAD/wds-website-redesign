@@ -8,6 +8,7 @@ export default function DesignPage({page}) {
   return <>
     {page.styles && <style dangerouslySetInnerHTML={{__html:page.styles}}/>}
     <div style={{display:"contents"}} dangerouslySetInnerHTML={{__html:page.body}}/>
+    <link rel="stylesheet" href="/wds-growth-channels.css"/>
     <Runtime scripts={page.scripts}/>
   </>;
 }

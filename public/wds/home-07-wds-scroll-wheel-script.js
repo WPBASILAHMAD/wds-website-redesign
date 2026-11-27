@@ -19,7 +19,7 @@
  const clamp=x=>Math.max(0,Math.min(1,x));
  const smooth=x=>{x=clamp(x);return x*x*(3-2*x);};
  const around=s=>"translate(240 260) scale("+s.toFixed(4)+") translate(-240 -260)";
- let frame=0,last=-1,keyboardOverride=false;
+ let frame=0,last=-1,keyboardOverride=false,target=0,current=0,initialized=false;
  function paint(p){
   if(p===last)return;
   last=p;
@@ -56,12 +56,25 @@
  }
  function measure(){
   frame=0;
-  if(reduced.matches||keyboardOverride){paint(1);return;}
+  if(reduced.matches||keyboardOverride){current=target=1;paint(1);return;}
   const vh=window.innerHeight||document.documentElement.clientHeight;
-  const top=track.getBoundingClientRect().top;
-  // Scroll down to assemble; scroll up across the same range to disassemble.
-  const start=vh*.88,end=vh*.13;
-  paint(clamp((start-top)/Math.max(1,start-end)));
+  const rect=track.getBoundingClientRect(),style=getComputedStyle(track),stageStyle=getComputedStyle(stage);
+  const sticky=stageStyle.position==="sticky";
+  const padTop=parseFloat(style.paddingTop)||0,padBottom=parseFloat(style.paddingBottom)||0;
+  if(sticky){
+   const pinTop=parseFloat(stageStyle.top)||0;
+   // Start just before the stage settles below the header; finish before the runway ends.
+   const start=pinTop-padTop+Math.min(72,vh*.10);
+   const distance=Math.max(160,padBottom*.73);
+   target=clamp((start-rect.top)/distance);
+  }else{
+   const start=vh*.90,end=Math.max(vh*.27,(parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--wds-header-space"))||80)+24);
+   target=clamp((start-rect.top)/Math.max(1,start-end));
+  }
+  if(!initialized){current=target;initialized=true;}else current+=(target-current)*.19;
+  if(Math.abs(target-current)<.002)current=target;
+  paint(current);
+  if(current!==target)frame=requestAnimationFrame(measure);
  }
  function queue(){if(!frame)frame=requestAnimationFrame(measure);}
  stage.addEventListener("focusin",function(e){

@@ -12,15 +12,15 @@ function load(src){
   });
   loaded.set(src,promise);return promise;
 }
-let sequence;
-export default function Runtime({scripts}) {
+let coreSequence;
+export default function Runtime({scripts,sharedOnly=false}) {
   useEffect(()=>{
-    if(!sequence)sequence=(async()=>{
-      for(const src of [...core,...scripts])await load(src);
+    if(!coreSequence)coreSequence=(async()=>{for(const src of core)await load(src);})();
+    coreSequence.then(async()=>{
+      for(const src of scripts)await load(src);
       if(window.gsap&&window.ScrollTrigger)window.ScrollTrigger.refresh();
-      document.documentElement.dataset.wdsReady="true";
-    })();
-    sequence.catch(error=>console.error("[WDS]",error));
-  },[scripts]);
+      if(!sharedOnly)document.documentElement.dataset.wdsReady="true";
+    }).catch(error=>console.error("[WDS]",error));
+  },[scripts,sharedOnly]);
   return null;
 }
