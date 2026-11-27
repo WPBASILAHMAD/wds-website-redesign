@@ -107,3 +107,25 @@ html{scroll-padding-top:calc(var(--wds-header-space,5rem) + .75rem)}
 .footer :is(.page-link,.copyright-link):is(:hover,:focus-visible){color:#ff5353!important}
 @media(max-width:991px){.wds-sticky-header-space .navbar .navbar-left-wrap{gap:.5rem}}
 @media(max-width:375px){.wds-sticky-header-space .navbar .brand-logo.w-nav-brand{width:7.5rem;min-width:7.5rem;flex-basis:7.5rem}}
+
+/* Shared hero clearance: retain each page's original inner layout. */
+.section.home-hero{padding-top:clamp(2.25rem,4.2vw,4.5rem)}
+@media(max-width:767px){.section.home-hero{padding-top:2.25rem}}
+@media(max-width:479px){.section.home-hero{padding-top:1.75rem}}
+/* Decorative animated network; original map and office labels are preserved. */
+.global-locations .locations-bottom{isolation:isolate}
+.global-locations .map-image{display:block;width:100%;height:auto}
+.global-locations .location-group{z-index:3}
+.global-locations .location-arrows{filter:url(#wds-asterisk-navy)}
+.wds-map-network{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none;overflow:visible}
+.wds-map-network path{fill:none;vector-effect:non-scaling-stroke;stroke-linecap:round}
+.wds-map-route-base{stroke:#a9bdd6;stroke-width:1.2;opacity:.48}
+.wds-map-route-light{stroke:#36577e;stroke-width:2.1;stroke-dasharray:6 94;stroke-dashoffset:0;opacity:.9;filter:drop-shadow(0 0 3px #82baff) drop-shadow(0 0 7px #a9bdd6);animation:wds-map-travel var(--route-duration,6s) linear var(--route-delay,0s) infinite}
+.wds-map-route-light.is-red{stroke:#d90000;filter:drop-shadow(0 0 4px #ff7770);opacity:.66;animation-direction:reverse}
+.wds-map-dot{fill:#36577e;opacity:.8}
+.wds-map-halo{fill:#a9bdd6;opacity:.35;transform-box:fill-box;transform-origin:center;animation:wds-map-pulse 3s ease-out var(--node-delay,0s) infinite}
+@keyframes wds-map-travel{to{stroke-dashoffset:-100}}
+@keyframes wds-map-pulse{0%{transform:scale(.55);opacity:.5}80%,100%{transform:scale(1.8);opacity:0}}
+.wds-mobile-map{display:none;position:relative;width:100%;isolation:isolate}
+@media(max-width:479px){.wds-mobile-map{display:block}.wds-mobile-map .mob-map{width:100%;height:auto}.wds-mobile-map .wds-map-network{opacity:.75}.wds-map-route-base{stroke-width:.8}.wds-map-route-light{stroke-width:1.5}}
+@media(prefers-reduced-motion:reduce){.wds-map-route-light,.wds-map-halo{animation:none}.wds-map-route-light{stroke-dasharray:4 12;opacity:.4}.wds-map-halo{opacity:.2}}
